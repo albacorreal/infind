@@ -1,6 +1,8 @@
 # IoT MINIROVERS - GRUPO 15
 
-## Proyecto en GitHub Projects: https://github.com/users/albacorreal/projects/4/views/1
+<a href="https://github.com/users/albacorreal/projects/4/views/1">
+  <img src="https://img.shields.io/badge/GitHub%20Projects%20Dashboard-8A2BE2"/>
+</a>
 
 - Alba Correal
   <a href="mailto:alba.correal@uma.es">
