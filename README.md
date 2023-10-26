@@ -22,11 +22,3 @@
 <div align="center">
 <img src=https://github.com/users/albacorreal/infind/multimedia/portada.jpg width="400"/>
 </div>
-
-
-
-
-## Librerías creadas
-
-- LEDModel_VM.slx: modelo de señalización
-- BatteryModel_VM.slx: aplicación del modelo de señalización a la batería
