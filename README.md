@@ -1,4 +1,4 @@
-# Piero - Respositorio Grupo 02
+# IoT MINIROVERS - GRUPO 15
 
 ## Proyecto en GitHub Projects: https://github.com/users/albacorreal/projects/4/views/1
 
@@ -20,5 +20,5 @@
   </a>
 
 <div align="center">
-<img src=https://github.com/users/albacorreal/infind/multimedia/portada.jpg width="400"/>
+<img src=https://github.com/albacorreal/infind/blob/main/multimedia/portada.jpg width="400"/>
 </div>
