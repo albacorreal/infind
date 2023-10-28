@@ -1,0 +1,788 @@
+[
+    {
+        "id": "2ff4be67ba099b8b",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ae04eb1baa553967",
+        "type": "mqtt in",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "topic": "infind/GRUPO15/led/status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4b8e505a937f3634",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "8235fe47f0457a05",
+                "eb01ea5e04fe0d12"
+            ]
+        ]
+    },
+    {
+        "id": "8235fe47f0457a05",
+        "type": "debug",
+        "z": "2ff4be67ba099b8b",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "08971bdc766100ca",
+        "type": "ui_slider",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "label": "Intensidad",
+        "tooltip": "",
+        "group": "7e28d72ae019e641",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "57c20815cb11f3ab"
+            ]
+        ]
+    },
+    {
+        "id": "3ed0163a916420db",
+        "type": "mqtt in",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "topic": "infind/GRUPO15/conexion",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4b8e505a937f3634",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 620,
+        "wires": [
+            [
+                "12dfcffa25fd18c2",
+                "8ed33646764e93a4"
+            ]
+        ]
+    },
+    {
+        "id": "b5dc687c012e8aee",
+        "type": "mqtt in",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "topic": "infind/GRUPO15/datos",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4b8e505a937f3634",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 940,
+        "wires": [
+            [
+                "1bb521be87ea7963",
+                "43c54dea53edf4d3",
+                "d7cce20d24a947fe",
+                "a8d7379ec05d85bc",
+                "b834a3ab81cd90b4",
+                "366166228c611cad",
+                "5ed3e67c474952a3",
+                "7960e0d42798170a"
+            ]
+        ]
+    },
+    {
+        "id": "57c20815cb11f3ab",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "parametro",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "4082b6b0d29476a0"
+            ]
+        ]
+    },
+    {
+        "id": "d169e7801ae43f4f",
+        "type": "mqtt out",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "topic": "infind/GRUPO15/led/cmd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4b8e505a937f3634",
+        "x": 630,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "4082b6b0d29476a0",
+        "type": "function",
+        "z": "2ff4be67ba099b8b",
+        "name": "Convierte a JSON",
+        "func": "msg.payload = {\"level\": flow.get(\"parametro\")}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "d169e7801ae43f4f",
+                "8322a789cddda270"
+            ]
+        ]
+    },
+    {
+        "id": "8322a789cddda270",
+        "type": "debug",
+        "z": "2ff4be67ba099b8b",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1bb2635bfa3bcecf",
+        "type": "comment",
+        "z": "2ff4be67ba099b8b",
+        "name": "Selecciona Intensidad ",
+        "info": "",
+        "x": 120,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d5ff1f1f7b36294c",
+        "type": "comment",
+        "z": "2ff4be67ba099b8b",
+        "name": "Información sensores y conexión wifi",
+        "info": "",
+        "x": 200,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "1bb521be87ea7963",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DHT11.temp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 840,
+        "wires": [
+            [
+                "fbdcfdaa11fb9663"
+            ]
+        ]
+    },
+    {
+        "id": "fbdcfdaa11fb9663",
+        "type": "ui_gauge",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "group": "fe9a8f1d7fc6507c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 710,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "d0442dce1e94b615",
+        "type": "ui_chart",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "group": "fe9a8f1d7fc6507c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Humedad",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 720,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "95bb12ebf64f9a03",
+        "type": "ui_text",
+        "z": "2ff4be67ba099b8b",
+        "group": "c98c25d78f080a75",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 740,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "43c54dea53edf4d3",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DHT11.hum",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 900,
+        "wires": [
+            [
+                "d0442dce1e94b615"
+            ]
+        ]
+    },
+    {
+        "id": "d7cce20d24a947fe",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Vcc",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 960,
+        "wires": [
+            [
+                "05d297099de1f289"
+            ]
+        ]
+    },
+    {
+        "id": "a8d7379ec05d85bc",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Uptime",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1020,
+        "wires": [
+            [
+                "95bb12ebf64f9a03"
+            ]
+        ]
+    },
+    {
+        "id": "b834a3ab81cd90b4",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Wifi.IP",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1080,
+        "wires": [
+            [
+                "c4b1e4f811786270"
+            ]
+        ]
+    },
+    {
+        "id": "366166228c611cad",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Wifi.RSSI",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1140,
+        "wires": [
+            [
+                "5220fb9c613a263b"
+            ]
+        ]
+    },
+    {
+        "id": "c4b1e4f811786270",
+        "type": "ui_text",
+        "z": "2ff4be67ba099b8b",
+        "group": "c98c25d78f080a75",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "IP",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 730,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "5220fb9c613a263b",
+        "type": "ui_gauge",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "group": "c98c25d78f080a75",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "RSSI",
+        "label": "dB",
+        "format": "{{value}}",
+        "min": "-100",
+        "max": "0",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 730,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "12dfcffa25fd18c2",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.online",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 620,
+        "wires": [
+            [
+                "0ccb768d22de5d1d"
+            ]
+        ]
+    },
+    {
+        "id": "0ccb768d22de5d1d",
+        "type": "ui_text",
+        "z": "2ff4be67ba099b8b",
+        "group": "c98c25d78f080a75",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Conexión a broker",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 650,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d271df9c91f79016",
+        "type": "comment",
+        "z": "2ff4be67ba099b8b",
+        "name": "Información estado conexión",
+        "info": "",
+        "x": 180,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c347a6823832362d",
+        "type": "ui_text",
+        "z": "2ff4be67ba099b8b",
+        "group": "7e28d72ae019e641",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Intensidad del led",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "eb01ea5e04fe0d12",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.led",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "c347a6823832362d"
+            ]
+        ]
+    },
+    {
+        "id": "5ed3e67c474952a3",
+        "type": "debug",
+        "z": "2ff4be67ba099b8b",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 160,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "8ed33646764e93a4",
+        "type": "debug",
+        "z": "2ff4be67ba099b8b",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "05d297099de1f289",
+        "type": "ui_gauge",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "group": "fe9a8f1d7fc6507c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Voltaje",
+        "label": "Voltios",
+        "format": "{{value | number:2}}",
+        "min": "0",
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 730,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "7960e0d42798170a",
+        "type": "change",
+        "z": "2ff4be67ba099b8b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Wifi.SSId",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1200,
+        "wires": [
+            [
+                "8ed79ceab8281ad3"
+            ]
+        ]
+    },
+    {
+        "id": "8ed79ceab8281ad3",
+        "type": "ui_text",
+        "z": "2ff4be67ba099b8b",
+        "group": "c98c25d78f080a75",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "SSID",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 730,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "6ca74442236ac517",
+        "type": "comment",
+        "z": "2ff4be67ba099b8b",
+        "name": "Muestra Intensidad del led",
+        "info": "",
+        "x": 170.3333282470703,
+        "y": 21.333328247070312,
+        "wires": []
+    },
+    {
+        "id": "4b8e505a937f3634",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7e28d72ae019e641",
+        "type": "ui_group",
+        "name": "Led",
+        "tab": "ba53d6ac6ca9420c",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "fe9a8f1d7fc6507c",
+        "type": "ui_group",
+        "name": "Sensores",
+        "tab": "ba53d6ac6ca9420c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "c98c25d78f080a75",
+        "type": "ui_group",
+        "name": "Estado",
+        "tab": "ba53d6ac6ca9420c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ba53d6ac6ca9420c",
+        "type": "ui_tab",
+        "name": "Tarea 1 Grupo",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
