@@ -6,6 +6,7 @@
 <div align="center">
 <img src=https://github.com/albacorreal/infind/blob/main/multimedia/portada.jpg width="400"/>
 </div>
+
 - Alba Correal
   <a href="mailto:alba.correal@uma.es">
     <img src="https://img.shields.io/badge/_GMAIL_-FF0000?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail Badge"/>
