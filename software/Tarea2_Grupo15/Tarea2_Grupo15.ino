@@ -20,7 +20,6 @@
 //Libraries
 #include <string>
 #include <ArduinoJson.h> 
-#include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <DHTesp.h>
 
@@ -347,6 +346,7 @@ void loop() {
   registro_datos dato;
 
   unsigned long ahora = millis();
+  static unsigned long ultimo = 0;
 
   // LED toggle for OTA update every 0.5s
   if (ahora-ultimo >= 500)
