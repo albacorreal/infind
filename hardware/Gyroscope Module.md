@@ -6,7 +6,7 @@ The MPU-6050 Module is one of the most common peripherals for Arduino and ESP32.
 
 ## Connecting the MPU-6050 to the ESP32 board
  
-![Gyroscope Module Wiring](https://github.com/albacorreal/infind/blob/main/multimedia/mpu6050wiring.jpg)
+![Gyroscope Module Wiring](https://github.com/albacorreal/infind/blob/main/multimedia/MPU6050_wiring.jpg)
 ## Programming the NEO-6M module with Adafruit_MPU6050.h and Adafruit_Sensor.h libraries
 A sample code is provided below: 
 ~~~c++
