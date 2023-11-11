@@ -6,7 +6,7 @@ The GPS NEO-6M Module is one of the most common peripherals for Arduino and ESP3
 
 ## Connecting the NEO-6M to the ESP32 board
 Bare in mind that its operating voltage is 5V. 
-![GPS Module Wiring](multimedia/gpsneo6m_wiring.jpg)
+![GPS Module Wiring](https://github.com/albacorreal/infind/blob/main/multimedia/gpsneo6m_wiring.jpg)
 ## Programming the NEO-6M module with TinyGPS++.h library
 A sample code is provided below: 
 ~~~c++
