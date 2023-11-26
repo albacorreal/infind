@@ -1,0 +1,228 @@
+[
+    {
+        "id": "78a04b20ecd1bf51",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "85fbab59bb67c2ca",
+        "type": "mongodb in",
+        "z": "78a04b20ecd1bf51",
+        "mongodb": "34885f67e71a68f9",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "78db208a23e2d9c0"
+            ]
+        ]
+    },
+    {
+        "id": "54d111b6303d3a1b",
+        "type": "ui_text_input",
+        "z": "78a04b20ecd1bf51",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "5c5286a16f4e1b0f"
+            ]
+        ]
+    },
+    {
+        "id": "5c5286a16f4e1b0f",
+        "type": "change",
+        "z": "78a04b20ecd1bf51",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "input",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7d2eb7e9f98a66d",
+        "type": "function",
+        "z": "78a04b20ecd1bf51",
+        "name": "searchParam",
+        "func": "msg.payload = flow.get(\"input\")\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "85fbab59bb67c2ca"
+            ]
+        ]
+    },
+    {
+        "id": "32c6300d1a9e6ccf",
+        "type": "mqtt out",
+        "z": "78a04b20ecd1bf51",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4cdea8646714a909",
+        "x": 770,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "78db208a23e2d9c0",
+        "type": "function",
+        "z": "78a04b20ecd1bf51",
+        "name": "function 1",
+        "func": "msg.dato_1 = msg.payload.dato_1; \nmsg.dato_2 = msg.payload.dato_2; \nmsg.payload = {\"dato_1\":msg.dato_1,\"dato_2\":msg.dato_2}\nmsg.topic = flow.topicname\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "32c6300d1a9e6ccf"
+            ]
+        ]
+    },
+    {
+        "id": "589c3ec0d896c7c1",
+        "type": "ui_text_input",
+        "z": "78a04b20ecd1bf51",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 200,
+        "y": 260,
+        "wires": [
+            [
+                "4e61285aca43d62a"
+            ]
+        ]
+    },
+    {
+        "id": "4e61285aca43d62a",
+        "type": "change",
+        "z": "78a04b20ecd1bf51",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topicname",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "34885f67e71a68f9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "1883",
+        "db": "ejercicio",
+        "name": "",
+        "credentials": {
+            "user": "",
+            "password": ""
+        }
+    },
+    {
+        "id": "4cdea8646714a909",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": "",
+        "credentials": {
+            "user": "",
+            "password": ""
+        }
+    }
+]
