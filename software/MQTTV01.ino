@@ -1,11 +1,21 @@
 //Libraries
 #include <string>
 #include <ArduinoJson.h> 
-#include <WiFi.h>
+
 #include <PubSubClient.h>
 /* insert your sensor libraries here
 #include <DHTesp.h>
 */
+
+#ifdef ESP32
+#include <WiFi.h>
+#endif
+
+#ifdef ESP8266
+#include <ESP8266WiFi.h>
+#endif
+
+
 //Mqtt Client
 WiFiClient wClient;
 PubSubClient mqtt_client(wClient);
@@ -18,11 +28,13 @@ const String mqtt_user = "infind";
 const String mqtt_pass = "zancudo";
 String IP;
 int RSSI;
+
 // Strings for topics e ID
 String ID_PLACA;
 String conexion; // for LastWill & Testament
 String datos_uv; // publish topic
 String data; //subscribe topic
+
 //-----------------------------------------------------
 //Set Up WiFi Connection
 void conecta_wifi() {
@@ -81,7 +93,7 @@ void setup() {
   //Configuraciones del cliente mqtt
   mqtt_client.setServer(mqtt_server.c_str(), 1883);
   mqtt_client.setBufferSize(512); // para poder enviar mensajes de hasta X bytes
-  mqtt_client.setCallback(callback);  //para procesar los mensajes cada vez que llegue uno al topic que estamos suscritos.
+  //mqtt_client.setCallback(callback);  //para procesar los mensajes cada vez que llegue uno al topic que estamos suscritos.
 
   conecta_mqtt(); //establecemos la conexión del cliente con el servidor
 
@@ -101,6 +113,7 @@ void setup() {
   Serial.println("Termina setup en " +  String(millis()) + " ms");
  
 }
+unsigned long ultimo_mensaje = 0;
 
 void loop() {
  if (!mqtt_client.connected())  //si no está conectado el cliente al broker
@@ -126,7 +139,7 @@ void loop() {
     ultimo_mensaje = ahora;
 
     // Lectura del sensor  
-    dato_uv = serialRead(A0);
+    float dato_uv = serialRead(A0);
     
     //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
     String mensaje = "{\"RadiacionDHT11\":"+ String(dato_uv) +"}";
@@ -137,6 +150,8 @@ void loop() {
     Serial.println("Payload : "+ mensaje);
    
     //Publicamos el mensaje
-    mqtt_client.publish(datos.c_str(), mensaje.c_str());
+    mqtt_client.publish(datos_uv.c_str(), mensaje.c_str());
   
+}
+
 }
