@@ -91,7 +91,7 @@ void conecta_mqtt() {
 
 void setup() {
   // Start Up Serial Communication
-   Serial.begin(115200);
+  Serial.begin(115200);
   Serial.println();
   Serial.println("Empieza setup...");
   
@@ -132,19 +132,19 @@ void setup() {
  
  //Publicamos el mensaje
   mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
-
+/*
   if (!bmp.begin()) {
   Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
-  while (1) {}
+  //while (1) {}
   }
 
   Serial.println("Adafruit MPU6050 test!");
   // Try to initialize!
   if (!mpu.begin()) {
     Serial.println("Failed to find MPU6050 chip");
-    while (1) {
-      delay(10);
-    }
+    //while (1) {
+    //  delay(10);
+    //}
   }
   Serial.println("MPU6050 Found!");
 
@@ -206,7 +206,7 @@ void setup() {
     Serial.println("5 Hz");
     break;
   }
-
+*/
   //Mensajes de finalización de setup 
   Serial.println("Identificador placa: "+ ID_PLACA);
   Serial.println("Termina setup en " +  String(millis()) + " ms");
@@ -252,7 +252,7 @@ void loop() {
     mqtt_client.publish(datos_uv.c_str(), mensaje.c_str());
   
   }
-
+/*
   Serial.print("Temperature = ");
   Serial.print(bmp.readTemperature());
   Serial.println(" *C");
@@ -280,7 +280,7 @@ void loop() {
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
 
-  /* Print out the values */
+  //Print out the values 
   Serial.print("Acceleration X: ");
   Serial.print(a.acceleration.x);
   Serial.print(", Y: ");
@@ -303,4 +303,6 @@ void loop() {
 
   Serial.println("");
   delay(500);
+*/
 }
+
