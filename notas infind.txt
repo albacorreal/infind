@@ -1,0 +1,101 @@
+presion
+temperatura
+GPS
+intensidad de luz
+radiacion
+humedad
+altitud
+mac/ip
+id (nombre rover)
+ultima actualizacion
+
+
+Rover 1: Sensorica basica
+topic entorno : humedad, temperatura, presion, altitud, gps, radiación 
+topic emergencia : giroscopio (terremoto)
+
+Rover 2: Extractor de muestras.
+topic ubicación: gps 
+NO PUBLICAR: acelerómetro para control interno. 
+topic emergencia: caída. 
+
+
+*****FUNCIONES******
+
+-----------------------------------------------------------------------------
+SECUENCIACIÓN DE TAREAS: con la raspberry pi, creamos dos listas de orden de tareas para los robots. Tienen este formato: 
+
+  Priority  |  Latitude  | Length  |  Rover ID  |  timeout
+----------------------------------------------------------
+     1	    |    25.2    |   0.2   |   Sensor   |  125 sec
+-----------------------------------------------------------
+
+  Priority  |  Latitude  | Length  |  Rover ID  |  timeout
+----------------------------------------------------------
+     1	    |    15.7    |   9.4   |  Actuator  |  125 sec
+-----------------------------------------------------------
+
+La prioridad se asigna de la siguente forma:
+Sensor:  
+1) Consignas enviadas por usuario via Telegram
+2) Consignas automáticas generadas aleatoriamente
+Actuador:
+1) En caso de que hayan pasado x semanas o que el carrito de muestras esté lleno, debe regresar a la base donde está la raspberry para su extracción y su 
+posterior posprocesado.
+2) Consignas enviadas por usuario via telegram
+3) Seguimiento consignas automáticas por encima del umbral definido por sensor.
+El robot actuador seguirá constantemente al sensor, siempre y cuando no llegue una consigna de usuario.  
+
+Esto implica que si un usuario introduce una consigna en cualquiera de ellos, pasará automáticamente a ejecutar esa tarea una vez acabe la actual.
+
+El mensaje enviado por la Raspberry contendrá los campos: 
+{Rover_id, latitude, length} 
+Se enviará una única vez por LoRa a la ESP correspondiente, teniendo en cuenta que si supera el timeout deberá enviar un mensaje de error a NodeRed. 
+
+El propio rover será el encargado de asegurar que ha llegado a la latitud y longitud adecuadas (de acuerdo con unas tolerancias fijas), una vez que llegue a esas coordenadas, tomará las muestras pertinentes y comunicará su latitud y longitud a la Raspberry por LoRa. Esta eliminará la tarea actual y reasignará las prioridades en consencuencia.
+
+-------------------------------------------------------------------------------
+
+ESP32
+ 
+Lógica Rover sensor: 
+- Navegación según coordenadas
+- toma de datos 
+- análisis básico de datos: detección de terremotos y de umbrales significativos en las medidas.
+- publicación por dos vías definidas arriba.
+- emergencia: terremoto
+
+ Lógica Rover actuador: 
+- Navegación según coordenadas
+- extracción de muestras (mandar una consigna al servo)
+- emergencia: carrito de muestras lleno
+- emergencia: recepción terremoto
+
+Descripción de las funciones: 
+
+Navegación según coordenadas: recibe por LoRa la latitud, longitud y rover id y se mueve a esas coordenadas utilizando la información del gps. Para un mejor control, se puede implementar el mci con el acelerómetro. 
+
+Publicación: los datos de los sensores se publicarán cada 1:30, los del giroscopio del terremoto, cada 30 segundos. 
+ 
+Emergencia: terremoto: (analisis datos acelerometro en esp del robot sensor). las esp se comunican entre sí vía espnow/lora si la distancia es menor a 500m, de lo contrario, la información se envía del robot sensor a la Raspberry con lora, que a su vez se encarga de enviarlo al actuador. 
+
+-----------------------------------------------------------------------------
+
+INTERFAZ
+
+Publicación de datos en función de fecha y coordenadas. 
+
+mapa con cuadricula, consulta mongo segun cuadrante, rango de coordenadas GPS
+casuistica de errores (dashboard: mostrar notificacion)
+
+telegram para solicitar nueva tarea
+
+visualización tareas robots
+
+notificación de mensajes de error
+
+-----------------------------------------------------------------------------
+
+
+
+
