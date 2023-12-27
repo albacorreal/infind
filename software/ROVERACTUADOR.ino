@@ -3,12 +3,6 @@
 #include <ArduinoJson.h> 
 
 #include <PubSubClient.h>
-/* insert your sensor libraries here
-#include <DHTesp.h>
-*/
-// #ifdef ESP8266
-// #include <ESP8266WiFi.h>
-// #endif
 
 #ifdef ESP32
   #include <esp_now.h>
@@ -25,13 +19,18 @@
 #include <ArduinoJson.h>
 #include <queue>
 
+// LoRa
 
+#include <SPI.h>
+#include <LoRa.h>
+//define the pins used by the transceiver module
+#define ss 5
+#define rst 14
+#define dio0 2
+
+// Sensors
 Adafruit_MPU6050 mpu;
 //Adafruit_BMP085 bmp;
-
-//Mqtt Client
-WiFiClient wClient;
-PubSubClient mqtt_client(wClient);
 
 // Update these with values suitable for your network.
 const String ssid = "infind";
@@ -48,22 +47,11 @@ String conexion; // for LastWill & Testament
 String emergencia; // publish topic
 String data; //subscribe topic
 
-// Pin numbers
-//const int uv_pin = 23;
-
 //-----------------------------------------------------
 // ESP-NOW
 
 // MAC receptora ESP32 victor para ESP-NOW
 uint8_t broadcastAddress[] = {0x24, 0xDC, 0xC3, 0xA7, 0x31, 0x48};// REPLACE WITH RECEIVER MAC ADDRESS
-
-// typedef struct struct_message {
-//  	char a[32];
-//  	int b;
-//  	float c;
-//  	String aviso;   
-//  	bool e;     // 
-// } struct_message; 
 
 String emergency_message; // DATOS QUE SE ENVIARAN A ROBER SENSOR
 char dataRcv[15];
@@ -106,31 +94,14 @@ void conecta_wifi() {
   Serial.println("WiFi connected, ip address: " + IP);
 }
 //-----------------------------------------------------
-//Set Up Client-Broker Connection
-void conecta_mqtt() {
-  // Loop until we're reconnected
-  while (!mqtt_client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Attempt to connect
-    //                                                                                WillTopic    , WillQoS, WillRetain, WillMessage
-    if (mqtt_client.connect(ID_PLACA.c_str(), mqtt_user.c_str(), mqtt_pass.c_str(),conexion.c_str(),       0,    true   ,"{\"online\":false}")) {
-      Serial.println(" conectado a broker: " + mqtt_server);
-      mqtt_client.subscribe(data.c_str());
-    } else {
-      Serial.println("ERROR:"+ String(mqtt_client.state()) +" reintento en 5s" );
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
-  
-}
+
 
 
 void setup() {
   // Start Up Serial Communication
   Serial.begin(115200);
   Serial.println();
-  Serial.println("Empieza setup...");
+  Serial.println("Empieza setup LoRa...");
   
   // ID de la placa
   #ifdef ESP32
@@ -145,31 +116,14 @@ void setup() {
     ID_PLACA = "ESP_" + String(ESP.getChipId());
   #endif
 
-   // Topics
-  conexion = "infind/GRUPO15/conexion";
-  data = "infind/GRUPO15/led/cmd";
-  ubicacionGPS = "infind/GRUPO15/...";
-  emergencia = "infind/GRUPO15/...";  // Emergencia caida, terremoto, carro lleno de muestras
+//    // Topics
+//   conexion = "infind/GRUPO15/conexion";
+//   data = "infind/GRUPO15/led/cmd";
+//   ubicacionGPS = "infind/GRUPO15/...";
+//   emergencia = "infind/GRUPO15/...";  // Emergencia caida, terremoto, carro lleno de muestras
 
-  conecta_wifi();   //establecemos conexión wifi
+//   conecta_wifi();   //establecemos conexión wifi
 
-  //Configuraciones del cliente mqtt
-  mqtt_client.setServer(mqtt_server.c_str(), 1883);
-  mqtt_client.setBufferSize(512); // para poder enviar mensajes de hasta X bytes
-  //mqtt_client.setCallback(callback);  //para procesar los mensajes cada vez que llegue uno al topic que estamos suscritos.
-
-  conecta_mqtt(); //establecemos la conexión del cliente con el servidor
-
-  //Mensaje formateado en JSON con el estado de conexión a true
-  String mensaje="{\"online\": ""true"" }";
-  
-  //Imprimimos mensaje y topic en el monitor serie
-  Serial.println();
-  Serial.println("Topic   : "+ conexion);
-  Serial.println("Payload : "+ mensaje);
- 
- //Publicamos el mensaje
-  mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
 /*
   if (!bmp.begin()) {
   Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
@@ -280,31 +234,54 @@ void setup() {
  			Serial.println(F("Failed to add peer"));
  			return;
  	}
- 
+
+  //-----------------------------------------------------------
+  // SET-UP LoRa Sender
+   Serial.begin(115200);
+  while (!Serial);
+  Serial.println("LoRa Sender");
+
+  //setup LoRa transceiver module
+  LoRa.setPins(ss, rst, dio0);
+  
+  //replace the LoRa.begin(---E-) argument with your location's frequency 
+  //433E6 for Asia
+  //866E6 for Europe
+  //915E6 for North America
+  while (!LoRa.begin(866E6)) {
+    Serial.println(".");
+    delay(500);
+  }
+
+  // Change sync word (0xF3) to match the receiver
+  // The sync word assures you don't get LoRa messages from other LoRa transceivers
+  // ranges from 0-0xFF
+  LoRa.setSyncWord(0xF3);
+  Serial.println("LoRa Initializing OK!");
+
+
 }
 
-
-
-
+//-----------------------------------------------
 unsigned long ultimo_mensaje = 0;
 
 void loop() {
- if (!mqtt_client.connected())  //si no está conectado el cliente al broker
-  {
-    conecta_mqtt();   //establecemos la conexión
+//  if (!mqtt_client.connected())  //si no está conectado el cliente al broker
+//   {
+//     conecta_mqtt();   //establecemos la conexión
 
-    //Mensaje formateado en JSON con el estado de conexión a true
-    String mensaje = "{\"online\": ""true"" }";
+//     //Mensaje formateado en JSON con el estado de conexión a true
+//     String mensaje = "{\"online\": ""true"" }";
 
-    //Imprimimos mensaje y topic en el monitor serie
-    Serial.println();
-    Serial.println("Topic   : "+ conexion);
-    Serial.println("Payload : "+ mensaje);
+//     //Imprimimos mensaje y topic en el monitor serie
+//     Serial.println();
+//     Serial.println("Topic   : "+ conexion);
+//     Serial.println("Payload : "+ mensaje);
 
-    //Publicamos el mensaje
-    mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
-  }
-  mqtt_client.loop(); // esta llamada para que la librería recupere el control
+//     //Publicamos el mensaje
+//     mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
+//   }
+//   mqtt_client.loop(); // esta llamada para que la librería recupere el control
 
   unsigned long ahora = millis();
     
@@ -312,12 +289,12 @@ void loop() {
     ultimo_mensaje_caida = ahora;
     ultimo_mensaje_carro = ahora;
 
-// ENVIAR POR ESP-NOW A ROBER SENSOR  
+// ENVIAR POR ESP-NOW A ROVER SENSOR  
 
 // Set values to send
   if(a.acceleration.z > 12 AND (ahora - ultimo_mensaje_terremoto >= 30000)){
 
-
+      // ESP-NOW
       String msg;
       StaticJsonDocument<64> root;
       root["RoverId"] = "Actuator";
@@ -334,6 +311,19 @@ void loop() {
      	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
       // Send message via ESP-NOW
  	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
+
+      // LoRa Sender
+
+        Serial.print("Sending packet: ");
+        //Serial.println(counter);
+
+        //Send LoRa packet to receiver
+        LoRa.beginPacket();
+        LoRa.print("hello ");
+        //LoRa.print(counter);
+        LoRa.endPacket();
+
+        delay(10000);
 
   }
 
@@ -356,8 +346,23 @@ void loop() {
       // Send message via ESP-NOW
  	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
 
+      // LoRa Sender
+
+      Serial.print("Sending packet: ");
+      //Serial.println(counter);
+
+      //Send LoRa packet to receiver
+       LoRa.beginPacket();
+       LoRa.print("hello ");
+        //LoRa.print(counter);
+      LoRa.endPacket();
+
+      delay(10000);
+
+
+
   }
-                                             //Diferenciar entre ultimo mensaje de cada emergencia
+  
   if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje_carro >= 30000)){
 
       String msg;
@@ -377,10 +382,39 @@ void loop() {
       // Send message via ESP-NOW
  	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
 
+      // LoRa Sender
+
+      Serial.print("Sending packet: ");
+      //Serial.println(counter);
+
+      //Send LoRa packet to receiver
+      LoRa.beginPacket();
+      LoRa.print("hello ");
+      //LoRa.print(counter);
+      LoRa.endPacket();
+
+      delay(10000);
   }
 
  	delay(1000);
 
-  }
+  // LoRa reciver
+
+  int packetSize = LoRa.parsePacket();
+  if (packetSize) {
+    // received a packet
+    Serial.print("Received packet '");
+
+    // read packet
+    while (LoRa.available()) {
+      String LoRaData = LoRa.readString();
+      Serial.print(LoRaData); 
+    }
+
+    // print RSSI of packet
+    Serial.print("' with RSSI ");
+    Serial.println(LoRa.packetRssi());
 
 }
+
+
