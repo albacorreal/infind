@@ -67,6 +67,7 @@ uint8_t broadcastAddress[] = {0x24, 0xDC, 0xC3, 0xA7, 0x31, 0x48};// REPLACE WIT
 
 String emergency_message; // DATOS QUE SE ENVIARAN A ROBER SENSOR
 char dataRcv[15];
+uint MAX_SIZE = ;
 
 // callbacks for sending and receiving data
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -124,41 +125,6 @@ void conecta_mqtt() {
   
 }
 
-//-----------------------------------------------------------
-// deserializeJson
-//-----------------------------------------------------------
-void deserializeJSON (String respuesta, int* max_temp, int* min_temp)
-{
-  StaticJsonDocument<128> root;
-  deserializeJson(root, respuesta);
-  *max_temp = root["max_temp"];
-  *min_temp = root["min_temp"];
-}
-
-//-----------------------------------------------------------
-// serializeJson
-//-----------------------------------------------------------
-void serializeObject(String * mensaje) {
-  
-    StaticJsonDocument<1024>doc;
-    //doc["MAC"] = 
-    //doc["Time"] = 
-    //doc["GPS"] = 
-    //doc["Pressure"] =
-    //doc["Radiation"] = 
-    //doc["Altitude"]
-    //doc["Temperature"]
-    //doc["Humidity"]
-    doc["accelerometer"]["acceleration"]["x"] = 
-    doc["accelerometer"]["acceleration"]["y"] = 
-    doc["accelerometer"]["acceleration"]["z"] = 
-    doc["accelerometer"]["gyro"]["x"] = 
-    doc["accelerometer"]["gyro"]["y"] = 
-    doc["accelerometer"]["gyro"]["z"] = 
-
-    serializeJson(doc,mensaje);
-}
-
 
 void setup() {
   // Start Up Serial Communication
@@ -181,7 +147,6 @@ void setup() {
 
    // Topics
   conexion = "infind/GRUPO15/conexion";
-  //datos_uv = "infind/GRUPO15/uv";
   data = "infind/GRUPO15/led/cmd";
   ubicacionGPS = "infind/GRUPO15/...";
   emergencia = "infind/GRUPO15/...";  // Emergencia caida, terremoto, carro lleno de muestras
@@ -343,153 +308,74 @@ void loop() {
 
   unsigned long ahora = millis();
     
-  //if (ahora - ultimo_mensaje >= 5000) {
-    ultimo_mensaje = ahora;
-
-    // Lectura del sensor  
-    //float dato_uv = analogRead(uv_pin);
-    
-//PUBLICAR POR MQTT----------------------------
-
-    if (CONDICIONES PARA QUE SE DE UN TERREMOTO AND (ahora - ultimo_mensaje >= 30000)){
-      //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
-      String mensaje = "{\"Emergencia\": ""TERREMOTO "" + "\"Acelerometro\": +    }";
-    
-      //Imprimimos el mensaje en el monitor serie
-      Serial.println();
-      Serial.println("Topic   : "+ emergencia);
-      Serial.println("Payload : "+ mensaje);
-
-      sensors_event_t a, g, temp;
-      mpu.getEvent(&a, &g, &temp);
-
-      //Print out the values 
-      Serial.print("Acceleration X: ");
-      Serial.print(a.acceleration.x);
-      Serial.print(", Y: ");
-      Serial.print(a.acceleration.y);
-      Serial.print(", Z: ");
-      Serial.print(a.acceleration.z);
-      Serial.println(" m/s^2");
-
-      Serial.print("Rotation X: ");
-      Serial.print(g.gyro.x);
-      Serial.print(", Y: ");
-      Serial.print(g.gyro.y);
-      Serial.print(", Z: ");
-      Serial.print(g.gyro.z);
-      Serial.println(" rad/s");
-
-      Serial.print("Temperature: ");
-      Serial.print(temp.temperature);
-      Serial.println(" degC");
-
-    }
-
-        if (CONDICIONES PARA QUE SE DE UNA CAIDA DEL ROVER AND (ahora - ultimo_mensaje >= 30000)){
-      //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
-      String mensaje = "{\"Emergencia\": ""CAIDA DEL ROBOT ACTUADOR "" + "\"Acelerometro\": +    }";
-    
-      //Imprimimos el mensaje en el monitor serie
-      Serial.println();
-      Serial.println("Topic   : "+ emergencia);
-      Serial.println("Payload : "+ mensaje);
-
-      sensors_event_t a, g, temp;
-      mpu.getEvent(&a, &g, &temp);
-
-      //Print out the values 
-      Serial.print("Acceleration X: ");
-      Serial.print(a.acceleration.x);
-      Serial.print(", Y: ");
-      Serial.print(a.acceleration.y);
-      Serial.print(", Z: ");
-      Serial.print(a.acceleration.z);
-      Serial.println(" m/s^2");
-
-      Serial.print("Rotation X: ");
-      Serial.print(g.gyro.x);
-      Serial.print(", Y: ");
-      Serial.print(g.gyro.y);
-      Serial.print(", Z: ");
-      Serial.print(g.gyro.z);
-      Serial.println(" rad/s");
-
-      Serial.print("Temperature: ");
-      Serial.print(temp.temperature);
-      Serial.println(" degC");
-
-    }
-
-         // lleno cuando llegue a X ubicaciones indicadas por RASPB 
-        if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje >= 30000)){
-      //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
-      String mensaje = "{\"Emergencia\": ""CAIDA DEL ROBOT ACTUADOR "" + "\"Acelerometro\": +    }";
-    
-      //Imprimimos el mensaje en el monitor serie
-      Serial.println();
-      Serial.println("Topic   : "+ emergencia);
-      Serial.println("Payload : "+ mensaje);
-
-      sensors_event_t a, g, temp;
-      mpu.getEvent(&a, &g, &temp);
-
-      //Print out the values 
-      Serial.print("Acceleration X: ");
-      Serial.print(a.acceleration.x);
-      Serial.print(", Y: ");
-      Serial.print(a.acceleration.y);
-      Serial.print(", Z: ");
-      Serial.print(a.acceleration.z);
-      Serial.println(" m/s^2");
-
-      Serial.print("Rotation X: ");
-      Serial.print(g.gyro.x);
-      Serial.print(", Y: ");
-      Serial.print(g.gyro.y);
-      Serial.print(", Z: ");
-      Serial.print(g.gyro.z);
-      Serial.println(" rad/s");
-
-      Serial.print("Temperature: ");
-      Serial.print(temp.temperature);
-      Serial.println(" degC");
-
-    }
-
-
-    Serial.println("");
-    delay(500);
-   
-    //Publicamos el mensaje
-    mqtt_client.publish(       DATOS A ENVIAR               .c_str(), mensaje.c_str());
+    ultimo_mensaje_terremoto = ahora;
+    ultimo_mensaje_caida = ahora;
+    ultimo_mensaje_carro = ahora;
 
 // ENVIAR POR ESP-NOW A ROBER SENSOR  
 
 // Set values to send
-                           //Diferenciar entre ultimo mensaje de cada emergencia
-  if(CONDICIONES TERREMOTO AND (ahora - ultimo_mensaje >= 30000)){
+  if(a.acceleration.z > 12 AND (ahora - ultimo_mensaje_terremoto >= 30000)){
 
-     	strcpy(emergency_message, "EMERGENCIA POR TERREMOTO");
-    	//emergency_message = "EMERGENCIA POR TERREMOTO";
+
+      String msg;
+      StaticJsonDocument<64> root;
+      root["RoverId"] = "Actuator";
+      root["ErrCode"] = "1";
+      root["Latitude"] = ;
+      root["Longitude"] = ;
+      root["Status"] = "Error" ;
+      root["Timestamp"] =  ;
+      serializeJson(root,msg);
+      Serial.println(msg);
+
+
+      char emergency_message[MAX_SIZE]
+     	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
       // Send message via ESP-NOW
  	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
 
   }
 
-  if(CONDICIONES CAIDA AND (ahora - ultimo_mensaje >= 30000)){
+  if(a.acceleration.z > (18) AND (ahora - ultimo_mensaje_caida >= 30000)){
 
-     	strcpy(emergency_message, "EMERGENCIA POR CAIDA");
-    	//emergency_message = "EMERGENCIA POR TERREMOTO";
+      String msg;
+      StaticJsonDocument<64> root;
+      root["RoverId"] = "Actuator";
+      root["ErrCode"] = "2";
+      root["Latitude"] = ;
+      root["Longitude"] = ;
+      root["Status"] = "Error" ;
+      root["Timestamp"] =  ;
+      serializeJson(root,msg);
+      Serial.println(msg);
+
+
+      char emergency_message[MAX_SIZE]
+     	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
       // Send message via ESP-NOW
  	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
 
   }
                                              //Diferenciar entre ultimo mensaje de cada emergencia
-  if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje >= 30000)){
+  if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje_carro >= 30000)){
 
-    strcpy(emergency_message, "EMERGENCIA POR TERREMOTO");
-    //emergency_message = "EMERGENCIA POR TERREMOTO";
+      String msg;
+      StaticJsonDocument<64> root;
+      root["RoverId"] = "Actuator";
+      root["ErrCode"] = "3";
+      root["Latitude"] = ;
+      root["Longitude"] = ;
+      root["Status"] = "Error" ;
+      root["Timestamp"] =  ;
+      serializeJson(root,msg);
+      Serial.println(msg);
+
+
+      char emergency_message[MAX_SIZE]
+     	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
+      // Send message via ESP-NOW
+ 	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
 
   }
 
