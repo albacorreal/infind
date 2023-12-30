@@ -1,0 +1,2522 @@
+[
+    {
+        "id": "15bac1d6c1e8ce30",
+        "type": "tab",
+        "label": "Telegram",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2703d8db364dec0a",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4cdea8646714a909",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2318fcc7e4967fd6",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#6769a2",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#2c9aa0",
+                "baseFont": "Verdana,Verdana,Geneva,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#4B7930",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#4B7930",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#6db046",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#4b7930",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "4b8e505a937f3634",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1f33bd2091f1c0f0",
+        "type": "telegram bot",
+        "botname": "patos2024Bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "3752afa1.deaf9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II15",
+        "name": ""
+    },
+    {
+        "id": "88f77589.0122d8",
+        "type": "ui_group",
+        "name": "Map",
+        "tab": "2b906797.81baa8",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2b906797.81baa8",
+        "type": "ui_tab",
+        "name": "MiniRovers",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7bb1eabcd14d9656",
+        "type": "ui_tab",
+        "name": "Emergency",
+        "icon": "warning",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f37759dda49c514b",
+        "type": "ui_group",
+        "name": "List",
+        "tab": "7bb1eabcd14d9656",
+        "order": 1,
+        "disp": true,
+        "width": "17",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "183ef49fa701a122",
+        "type": "ui_group",
+        "name": "Filters",
+        "tab": "7bb1eabcd14d9656",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": "Filters"
+    },
+    {
+        "id": "25125f8e3717a36a",
+        "type": "telegram receiver",
+        "z": "15bac1d6c1e8ce30",
+        "name": "Receiver",
+        "bot": "1f33bd2091f1c0f0",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 240,
+        "y": 500,
+        "wires": [
+            [
+                "b141d82c7347b206",
+                "701daaecd614c8bf"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6b8d796a451aa47b",
+        "type": "telegram sender",
+        "z": "15bac1d6c1e8ce30",
+        "name": "Sender",
+        "bot": "1f33bd2091f1c0f0",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1480,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "638536a881e34ccd",
+        "type": "telegram command",
+        "z": "15bac1d6c1e8ce30",
+        "name": "/start",
+        "command": "/start",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "1f33bd2091f1c0f0",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "9d4137677b5dc959"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b141d82c7347b206",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "Main",
+        "func": "flow.set(\"msgid\", msg.payload);\nif (msg.payload.content.substring(0, 1) != \"/\") {\n    if (msg.payload.content.substring(0, 1) == \"[\") {\n        msg.payload.coordinates = msg.payload.content;\n        msg.payload.content  = \"Coordinates sent successfully\";\n        return [msg,msg]\n    } else {\n    msg.payload.content = \"My essence exists to serve your every need, delving into the shadows to unravel the mysteries of your desires.\\n\"\n    msg.payload.content = msg.payload.content +\"In the realm of darkness, I await your commands. Unleash my power with caution, for the unknown is both ally and adversary.\\n\"\n    msg.payload.content = msg.payload.content + \"Commands:\\n/start - Begin our dark journey.\\n/info - Seek knowledge from the abyss.\\n\"\n    msg.payload.content = msg.payload.content + \"Choose wisely, for you have summoned me.\";\n        return [msg,null];\n    }\n}  ",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "5e385b9b4d759631"
+            ],
+            [
+                "eaa653032ea678c4"
+            ]
+        ]
+    },
+    {
+        "id": "bf286e30234b1741",
+        "type": "telegram command",
+        "z": "15bac1d6c1e8ce30",
+        "name": "/info",
+        "command": "/info",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "1f33bd2091f1c0f0",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 170,
+        "wires": [
+            [
+                "7877628d8c2c8977"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7877628d8c2c8977",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "info_msg",
+        "func": "msg.payload.content = \"The Codex of the Universe \";\nmsg.payload.content += \"\\n/start\";\nmsg.payload.content += \"\\n/info\";\nmsg.payload.content += \"\\n/download\";\nmsg.payload.content += \"\\n\\t/coordinates\";\n// msg.payload.content += \"\\n\\t\\t\\t/tasks\";\nmsg.payload.content += \"\\n/set_waypoint\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 170,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "9d4137677b5dc959",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "start_msg",
+        "func": "msg.payload.content = \"Behold, dear traveler, the shadows stir in acknowledgement.\\n\";\nmsg.payload.content += \"You have beckoned forth the enigmatic powers that oversee the minirovers sent to distant planets.\\n\\n\";\nmsg.payload.content += \"\\t\\t1.\\tTo extract knowledge from these rovers, utter the command /coordinates.\\n\";\nmsg.payload.content += \"\\t\\t2.\\tTo decree a destination for these celestial emissaries, unveil the coordinates with the command /set_waypoint.\\n\";\nmsg.payload.content += \"\\t\\t3.\\tTo download the data from the sensors from these rovers, send /download.\\n\";\nmsg.payload.content += \"\\t\\t4.\\tTo embark on your cosmic endeavors, consult the ancient codex of knowledge at /info, where all commands lie.\\n\\n\"\nmsg.payload.content += \"Speak your wishes wisely, for the void between stars conceals both revelations and perils.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "9d430f999da9ad70",
+        "type": "telegram command",
+        "z": "15bac1d6c1e8ce30",
+        "name": "/set_waypoint",
+        "command": "/set_waypoint",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "1f33bd2091f1c0f0",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 260,
+        "y": 230,
+        "wires": [
+            [
+                "c2e29680271fc2c5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c2e29680271fc2c5",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "set_waypoint_msg",
+        "func": "var opts = {\n    reply_markup: JSON.stringify({\n        \"inline_keyboard\": [[\n            {\n                \"text\": \"Sensor\",\n                \"callback_data\": \"0\"\n            },\n            {\n                \"text\": \"Actuator\",\n                \"callback_data\": \"1\"\n            }]\n        ]\n    })\n};\nmsg.payload.content = 'Choose your rover: ';\nmsg.payload.options = opts;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 230,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "e16d14175b40d88f",
+        "type": "comment",
+        "z": "15bac1d6c1e8ce30",
+        "name": "Telegram",
+        "info": "",
+        "x": 230,
+        "y": 50,
+        "wires": []
+    },
+    {
+        "id": "4c8f3f03fe5b8804",
+        "type": "telegram command",
+        "z": "15bac1d6c1e8ce30",
+        "name": "/coordinates",
+        "command": "/coordinates",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "1f33bd2091f1c0f0",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 260,
+        "y": 290,
+        "wires": [
+            [
+                "1196048f96b66359"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1196048f96b66359",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "coordinates_msg",
+        "func": "var opts = {\n    reply_markup : JSON.stringify({\n        \"inline_keyboard\": [[\n        {\n            \"text\": \"Sensor\",\n            \"callback_data\": \"2\"\n        },\n        {\n            \"text\": \"Actuator\",\n            \"callback_data\": \"3\"\n        }]\n    ]\n    })\n};\nmsg.payload.content = 'Choose your rover: ';\nmsg.payload.options = opts;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 290,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "2cc27cd37b39046b",
+        "type": "telegram event",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "bot": "1f33bd2091f1c0f0",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "32ecbc148ff91ab9"
+            ]
+        ]
+    },
+    {
+        "id": "32ecbc148ff91ab9",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "query_handler",
+        "func": "msg.roverId = msg.payload;\nif (msg.roverId.content == 0) {\n    flow.set(\"RoverId\",\"sensor\");\n    msg.payload.content = \"Set your coordinates with the format:\\n\";\n    msg.payload.content +=\"[x,y]\";\n    msg.payload.type = \"message\";\n    return [msg,null];\n}\nif (msg.roverId.content == 1) {\n    flow.set(\"RoverId\", \"actuator\");\n    msg.payload.content = \"Set your coordinates with the format:\\n\";\n    msg.payload.content += \"[x,y]\";\n    msg.payload.type = \"message\";\n    return [msg, null];\n}\nif (msg.roverId.content == 2){\n    msg.payload = {\"RoverId\": \"sensor\"};\n    msg.limit = 1;\n    //msg.payload.content = \"The coordinates of this robot are:\\n\";\n    //msg.payload.content += \"[x1,y1]\";\n    return [null, msg];\n}\nif (msg.roverId.content == 3) {\n    msg.payload = {\"RoverId\": \"actuator\"};\n    msg.limit = 1;\n    //msg.payload.content = \"The coordinates of this robot are:\\n\";\n    //msg.payload.content += \"[x2,y2]\";\n    return [null, msg];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [
+                "331d2f35e69e5eec"
+            ],
+            [
+                "9d0be7e57e476162"
+            ]
+        ]
+    },
+    {
+        "id": "c8840bdf7152e198",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "serialize",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getTime();\nmsg.payload = \n{\n    \"Sender\": \"user\",\n    \"RoverId\": flow.get(\"RoverId\"),\n    \"Latitude\": msg.payload[0],\n    \"Longitude\": msg.payload[1],\n    \"Timestamp\" : timestamp\n    \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 520,
+        "wires": [
+            [
+                "0363a3f9c23dd2a9"
+            ]
+        ]
+    },
+    {
+        "id": "006c493a0e9dacf2",
+        "type": "json",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 770,
+        "y": 520,
+        "wires": [
+            [
+                "c8840bdf7152e198"
+            ]
+        ]
+    },
+    {
+        "id": "eaa653032ea678c4",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "get_coordinates",
+        "func": "msg.payload = msg.payload.coordinates\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "006c493a0e9dacf2"
+            ]
+        ]
+    },
+    {
+        "id": "0363a3f9c23dd2a9",
+        "type": "mqtt out",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "topic": "II15/waypoints",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4b8e505a937f3634",
+        "x": 1100,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "b3facb7e189e5328",
+        "type": "mqtt in",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "topic": "II15/waypoints",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cdea8646714a909",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "9377a43b16862fef"
+            ]
+        ]
+    },
+    {
+        "id": "9377a43b16862fef",
+        "type": "debug",
+        "z": "15bac1d6c1e8ce30",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5840fd02850b29b6",
+        "type": "mongodb out",
+        "z": "15bac1d6c1e8ce30",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 720,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "074038277c5e5665",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "enter_data",
+        "func": "\nmsg= \n{\n    \"Priority\": \"1\",\n    \"Latitude\": \"12.8\",\n    \"Longitude\": \"20.1\",\n    \"Sender\":\"automatic\",\n    \"RoverId\":\"sensor\",\n    \"Timestamp\":\"7891203\",\n    \"Timeout\":\"2000000000\"\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "5840fd02850b29b6"
+            ]
+        ]
+    },
+    {
+        "id": "b0514ae444fcaf4d",
+        "type": "inject",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 620,
+        "wires": [
+            [
+                "074038277c5e5665"
+            ]
+        ]
+    },
+    {
+        "id": "9d0be7e57e476162",
+        "type": "mongodb in",
+        "z": "15bac1d6c1e8ce30",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 760,
+        "y": 400,
+        "wires": [
+            [
+                "c3f707d0c76f6edb"
+            ]
+        ]
+    },
+    {
+        "id": "f4edb27b7e5dedea",
+        "type": "mongodb in",
+        "z": "15bac1d6c1e8ce30",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 740,
+        "y": 700,
+        "wires": [
+            [
+                "023494e40e1fd07c"
+            ]
+        ]
+    },
+    {
+        "id": "795e21b8737045b4",
+        "type": "inject",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 510,
+        "y": 700,
+        "wires": [
+            [
+                "f4edb27b7e5dedea"
+            ]
+        ]
+    },
+    {
+        "id": "023494e40e1fd07c",
+        "type": "debug",
+        "z": "15bac1d6c1e8ce30",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c3f707d0c76f6edb",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "send_coordinates",
+        "func": "var latitude = msg.payload[0].Latitude;\nvar longitude = msg.payload[0].Longitude;\nmsg.payload = msg.roverId;\nmsg.payload.content =\"The coordinates of this rover are:\\n\";\nmsg.payload.content += \"Latitude: \" + String(latitude);\nmsg.payload.content +=\"\\nLongitude: \"+ String(longitude);\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 400,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "fd7b3a4bde05d62c",
+        "type": "telegram command",
+        "z": "15bac1d6c1e8ce30",
+        "name": "/download",
+        "command": "/download",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "1f33bd2091f1c0f0",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "426644aa6626818e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "426644aa6626818e",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "download_msg",
+        "func": "msg.download = msg.payload;\nmsg.document = \"sensor_data.csv\";\nmsg.payload ={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "332c497afc690ca4"
+            ]
+        ]
+    },
+    {
+        "id": "332c497afc690ca4",
+        "type": "mongodb in",
+        "z": "15bac1d6c1e8ce30",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 720,
+        "y": 340,
+        "wires": [
+            [
+                "7739f962e8d19647"
+            ]
+        ]
+    },
+    {
+        "id": "7739f962e8d19647",
+        "type": "csv",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "Priority,Latitude,Longitude,Sender,RoverId,Timestamp,Timeout",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 930,
+        "y": 340,
+        "wires": [
+            [
+                "17a1b839cd7378ab"
+            ]
+        ]
+    },
+    {
+        "id": "17a1b839cd7378ab",
+        "type": "file",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "filename": "document",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1080,
+        "y": 340,
+        "wires": [
+            [
+                "70cdad9d3d9eb861"
+            ]
+        ]
+    },
+    {
+        "id": "70cdad9d3d9eb861",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "document_msg",
+        "func": "msg.payload = msg.download;\nmsg.payload.content = msg.document;\nmsg.payload.type = \"document\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 340,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "5e385b9b4d759631",
+        "type": "link out",
+        "z": "15bac1d6c1e8ce30",
+        "name": "main_out",
+        "mode": "link",
+        "links": [
+            "3f28370088eb8559"
+        ],
+        "x": 605,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "3f28370088eb8559",
+        "type": "link in",
+        "z": "15bac1d6c1e8ce30",
+        "name": "main_in",
+        "links": [
+            "5e385b9b4d759631"
+        ],
+        "x": 1375,
+        "y": 160,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "2f2ea77ad32fb13d",
+        "type": "link in",
+        "z": "15bac1d6c1e8ce30",
+        "name": "query_in",
+        "links": [
+            "331d2f35e69e5eec"
+        ],
+        "x": 1375,
+        "y": 120,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "331d2f35e69e5eec",
+        "type": "link out",
+        "z": "15bac1d6c1e8ce30",
+        "name": "query_out",
+        "mode": "link",
+        "links": [
+            "2f2ea77ad32fb13d"
+        ],
+        "x": 615,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b049975433580b25",
+        "type": "inject",
+        "z": "15bac1d6c1e8ce30",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 920,
+        "y": 460,
+        "wires": [
+            [
+                "99c4d4553737532b"
+            ]
+        ]
+    },
+    {
+        "id": "99c4d4553737532b",
+        "type": "function",
+        "z": "15bac1d6c1e8ce30",
+        "name": "emergency_msg",
+        "func": "msg.payload = flow.get(\"msgid\");\nmsg.payload.content = \"⚠ An emergency has taken place ⚠\";\nmsg.payload.content += \"\\nRover services may be unavailable\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 460,
+        "wires": [
+            [
+                "6b8d796a451aa47b"
+            ]
+        ]
+    },
+    {
+        "id": "701daaecd614c8bf",
+        "type": "debug",
+        "z": "15bac1d6c1e8ce30",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "fd192577707bb85e",
+        "type": "comment",
+        "z": "2703d8db364dec0a",
+        "name": "Dashboard",
+        "info": "",
+        "x": 160,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "fd6e7be7bfeb03b6",
+        "type": "mqtt in",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cdea8646714a909",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 640,
+        "wires": [
+            [
+                "ed0f503b5f324175",
+                "d8ca733b5e540aba"
+            ]
+        ]
+    },
+    {
+        "id": "9cf263d3a622edee",
+        "type": "mqtt in",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Emergency",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cdea8646714a909",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 300,
+        "wires": [
+            [
+                "2d237b7e137ca981",
+                "f2852de1d137f6d9"
+            ]
+        ]
+    },
+    {
+        "id": "5cf234d679250ee8",
+        "type": "mqtt in",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Rovers",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cdea8646714a909",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 560,
+        "wires": [
+            [
+                "9948d37b637baf36",
+                "0961e413980f9846"
+            ]
+        ]
+    },
+    {
+        "id": "1da4208e5fa3282b",
+        "type": "ui_worldmap",
+        "z": "2703d8db364dec0a",
+        "group": "88f77589.0122d8",
+        "order": 1,
+        "width": "12",
+        "height": "10",
+        "name": "Map",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1130,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e05bba1f607881b8",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "map_data",
+        "func": "var query = msg.payload[0];\nmsg.payload = { \"name\": String(query._id), \"lat\": query.Latitude, \"lon\": query.Longitude, \"icon\": \"eyedropper\", \"iconColor\":\"#0000FF\",\"tooltip\": \"Sample taken\" }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "1da4208e5fa3282b"
+            ]
+        ]
+    },
+    {
+        "id": "2aaae70d9385fed3",
+        "type": "mqtt out",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Rovers",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4cdea8646714a909",
+        "x": 590,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "905651956f953a46",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "status_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": timestamp,\n    \"Status\":\"Task finished\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 960,
+        "wires": [
+            [
+                "2aaae70d9385fed3"
+            ]
+        ]
+    },
+    {
+        "id": "6c59a6604348deb8",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 960,
+        "wires": [
+            [
+                "905651956f953a46"
+            ]
+        ]
+    },
+    {
+        "id": "90a4b199d0aaf210",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 560,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "90770ac0a7db6962",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 720,
+        "y": 600,
+        "wires": [
+            [
+                "e05bba1f607881b8"
+            ]
+        ]
+    },
+    {
+        "id": "e0505c54f61ea8d3",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "operation": "find",
+        "x": 720,
+        "y": 680,
+        "wires": [
+            [
+                "c965227f2de81bd8"
+            ]
+        ]
+    },
+    {
+        "id": "27c19813cac69328",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "actuator_query",
+        "func": "    msg.payload = { '$and': [{ \"RoverId\": \"Actuator\" }, { \"Status\": \"Task finished\" }] }\n    msg.limit = 1;\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "90770ac0a7db6962"
+            ]
+        ]
+    },
+    {
+        "id": "2687011d711fab96",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "sensor_query",
+        "func": "msg.payload = {\"RoverId\":\"Sensor\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 680,
+        "wires": [
+            [
+                "e0505c54f61ea8d3"
+            ]
+        ]
+    },
+    {
+        "id": "58cd623642f225df",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 420,
+        "y": 1300,
+        "wires": [
+            [
+                "fa3a4b3e6e47983d"
+            ]
+        ]
+    },
+    {
+        "id": "6b16e2b93fdd854b",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1300,
+        "wires": [
+            [
+                "58cd623642f225df"
+            ]
+        ]
+    },
+    {
+        "id": "fa3a4b3e6e47983d",
+        "type": "debug",
+        "z": "2703d8db364dec0a",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "9948d37b637baf36",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year) + \" at \" + String(hours) + \":\" + String(minutes) + \":\" + String(seconds);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 560,
+        "wires": [
+            [
+                "90a4b199d0aaf210"
+            ]
+        ]
+    },
+    {
+        "id": "0961e413980f9846",
+        "type": "trigger",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "27c19813cac69328"
+            ]
+        ]
+    },
+    {
+        "id": "c965227f2de81bd8",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "map_data",
+        "func": "var query = msg.payload[0];\nvar tooltip = \"Altitude: \" + String(query.Altitude)+\"\\n\";\ntooltip += \"Temperature: \" + String(query.Temperature)+\"\\n\";\ntooltip +=    \"Humidity: \" + String(query.Humidity)+\"\\n\";\ntooltip +=    \"Pressure: \" + String(query.Sensor) + \"\\n\";\nmsg.payload = { \"name\": String(query._id), \"lat\": query.Latitude, \"lon\": query.Longitude, \"icon\": \"tachometer\", \"iconColor\":\"#FF0000\",\"tooltip\": tooltip }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 680,
+        "wires": [
+            [
+                "1da4208e5fa3282b"
+            ]
+        ]
+    },
+    {
+        "id": "474238fc3ac9f6ad",
+        "type": "mqtt out",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Sensors",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4cdea8646714a909",
+        "x": 590,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "0ca3a6d372b5f98a",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "sensor_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Sensor\",\n    \"Timestamp\": timestamp,\n    \"Latitude\":\"57.2\",\n    \"Longitude\":\"-1.35\",\n    \"Altitude\":\"250\",\n    \"Temperature\":\"21.8\",\n    \"Humidity\":\"45%\",\n    \"Pressure\": \"1024\",\n    \"Radiation\":\"0\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1000,
+        "wires": [
+            [
+                "474238fc3ac9f6ad"
+            ]
+        ]
+    },
+    {
+        "id": "e7d23dc8f4f2ed18",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 1000,
+        "wires": [
+            [
+                "0ca3a6d372b5f98a"
+            ]
+        ]
+    },
+    {
+        "id": "9a943d570bd13887",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 440,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "c174c1039665e94c",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1120,
+        "wires": [
+            [
+                "9a943d570bd13887"
+            ]
+        ]
+    },
+    {
+        "id": "ed0f503b5f324175",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year) + \" at \" + String(hours) + \":\" + String(minutes) + \":\" + String(seconds);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 640,
+        "wires": [
+            [
+                "ee61c4115a591bf9"
+            ]
+        ]
+    },
+    {
+        "id": "ee61c4115a591bf9",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 560,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "0533f0378c8438d9",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 440,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "867eeff44a77113a",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1160,
+        "wires": [
+            [
+                "0533f0378c8438d9"
+            ]
+        ]
+    },
+    {
+        "id": "b7b66f83c3494051",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "operation": "find",
+        "x": 420,
+        "y": 1340,
+        "wires": [
+            [
+                "ee704cbe570ded2a"
+            ]
+        ]
+    },
+    {
+        "id": "651c846607b290e3",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1340,
+        "wires": [
+            [
+                "b7b66f83c3494051"
+            ]
+        ]
+    },
+    {
+        "id": "ee704cbe570ded2a",
+        "type": "debug",
+        "z": "2703d8db364dec0a",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "d8ca733b5e540aba",
+        "type": "trigger",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 340,
+        "y": 680,
+        "wires": [
+            [
+                "2687011d711fab96"
+            ]
+        ]
+    },
+    {
+        "id": "e9ed62e5c9e6afd3",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 770,
+        "y": 740,
+        "wires": [
+            [
+                "48b60b187d598816"
+            ]
+        ]
+    },
+    {
+        "id": "48b60b187d598816",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "map_data",
+        "func": "msg.payload = { \"name\": \"home\", \"lat\": 36.7, \"lon\": -4.42, \"icon\": \"home\", \"iconColor\":\"#000000\",\"tooltip\": \"home\" }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 740,
+        "wires": [
+            [
+                "1da4208e5fa3282b"
+            ]
+        ]
+    },
+    {
+        "id": "2d237b7e137ca981",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day)+\"/\"+String(month)+\"/\"+String(year)+\" at \"+String(hours)+\":\"+String(minutes)+\":\"+String(seconds);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "a035bb6e10bdd082"
+            ]
+        ]
+    },
+    {
+        "id": "20e76ebdfce9726f",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "status_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": timestamp,\n    \"Status\":\"Sample Overflow\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "4f67926bb3100ed1"
+            ]
+        ]
+    },
+    {
+        "id": "11d15c38d09b7cbb",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 920,
+        "wires": [
+            [
+                "20e76ebdfce9726f"
+            ]
+        ]
+    },
+    {
+        "id": "4f67926bb3100ed1",
+        "type": "mqtt out",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Emergency",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4cdea8646714a909",
+        "x": 600,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "f4b5d9b5c5595f5f",
+        "type": "mqtt in",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Commands",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cdea8646714a909",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "18e9c4c44bbb38ce"
+            ]
+        ]
+    },
+    {
+        "id": "a8900df019b0857e",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "command_msg",
+        "func": "msg.payload = {\n    \"Priority\": \"1\",\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": 23041,\n    \"Status\":\"Task finished\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 880,
+        "wires": [
+            [
+                "054d9a5fd035b835"
+            ]
+        ]
+    },
+    {
+        "id": "ca46a9e97fa88233",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 880,
+        "wires": [
+            [
+                "a8900df019b0857e"
+            ]
+        ]
+    },
+    {
+        "id": "054d9a5fd035b835",
+        "type": "mqtt out",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "topic": "II15/Commands",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4cdea8646714a909",
+        "x": 600,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "f4a192cf5d7ee22a",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 450,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "1b12103319b22385",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1080,
+        "wires": [
+            [
+                "f4a192cf5d7ee22a"
+            ]
+        ]
+    },
+    {
+        "id": "c5d8706a0d35f10d",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 450,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "bdf5e19dc7535ee9",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1040,
+        "wires": [
+            [
+                "c5d8706a0d35f10d"
+            ]
+        ]
+    },
+    {
+        "id": "43f6fc7aa63fc004",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "operation": "find",
+        "x": 430,
+        "y": 1260,
+        "wires": [
+            [
+                "64e255416175bb22"
+            ]
+        ]
+    },
+    {
+        "id": "a06708748cd99a6b",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1260,
+        "wires": [
+            [
+                "43f6fc7aa63fc004"
+            ]
+        ]
+    },
+    {
+        "id": "64e255416175bb22",
+        "type": "debug",
+        "z": "2703d8db364dec0a",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "99ead37de017677b",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "operation": "find",
+        "x": 430,
+        "y": 1220,
+        "wires": [
+            [
+                "976674b90e829c78"
+            ]
+        ]
+    },
+    {
+        "id": "9fed20080950d7fa",
+        "type": "inject",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 1220,
+        "wires": [
+            [
+                "99ead37de017677b"
+            ]
+        ]
+    },
+    {
+        "id": "976674b90e829c78",
+        "type": "debug",
+        "z": "2703d8db364dec0a",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ee48513de1d9f396",
+        "type": "ui_toast",
+        "z": "2703d8db364dec0a",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "View emergencies",
+        "raw": false,
+        "className": "Error",
+        "topic": "⚠ An emergency has occurred ⚠",
+        "name": "Error",
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "e31b85006f72f440"
+            ]
+        ]
+    },
+    {
+        "id": "a035bb6e10bdd082",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 570,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f2852de1d137f6d9",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "error_msg",
+        "func": "msg = msg.payload;\nmsg.payload = msg.Status;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "ee48513de1d9f396"
+            ]
+        ]
+    },
+    {
+        "id": "575ab0285a6cd07d",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "emergency_query",
+        "func": "if(!msg.payload){\n    msg.payload = {}\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 340,
+        "wires": [
+            [
+                "e60e6d852310df59"
+            ]
+        ]
+    },
+    {
+        "id": "e60e6d852310df59",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "operation": "find",
+        "x": 810,
+        "y": 340,
+        "wires": [
+            [
+                "0d54744f888f80fd"
+            ]
+        ]
+    },
+    {
+        "id": "ad5a9d9ea3de0751",
+        "type": "ui_table",
+        "z": "2703d8db364dec0a",
+        "group": "f37759dda49c514b",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1170,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "0d54744f888f80fd",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "table_data",
+        "func": "msg.payload.forEach(function (item) {\n    // Delete unwanted fields\n    delete item._id;\n    delete item._msgid;\n    delete item.Sender;\n    delete item.Timestamp;\n});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 340,
+        "wires": [
+            [
+                "ad5a9d9ea3de0751"
+            ]
+        ]
+    },
+    {
+        "id": "e31b85006f72f440",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "tab_changer",
+        "func": "if (msg.payload = \"View all emergencies\") {\nmsg.payload = {\"tab\":\"Emergency\"}\nreturn msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 280,
+        "wires": [
+            [
+                "7e27755ca1057867"
+            ]
+        ]
+    },
+    {
+        "id": "7e27755ca1057867",
+        "type": "ui_ui_control",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "events": "all",
+        "x": 840,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18e9c4c44bbb38ce",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day)+\"/\"+String(month)+\"/\"+String(year)+\" at \"+String(hours)+\":\"+String(minutes)+\":\"+String(seconds);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "a8d41b78f48efc69",
+                "ed2c6624f3efe559"
+            ]
+        ]
+    },
+    {
+        "id": "a8d41b78f48efc69",
+        "type": "mongodb out",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 570,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9f2d8512ccb08c3b",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "commands_query",
+        "func": "    msg.payload = {}\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "6cb0ed9a464470b8"
+            ]
+        ]
+    },
+    {
+        "id": "6cb0ed9a464470b8",
+        "type": "mongodb in",
+        "z": "2703d8db364dec0a",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "operation": "find",
+        "x": 790,
+        "y": 120,
+        "wires": [
+            [
+                "79cfb3fff47007df"
+            ]
+        ]
+    },
+    {
+        "id": "a1a3169a21b250f5",
+        "type": "ui_table",
+        "z": "2703d8db364dec0a",
+        "group": "f37759dda49c514b",
+        "name": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1150,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "79cfb3fff47007df",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "table_data",
+        "func": "msg.payload.forEach(function (item) {\n    // Delete unwanted fields\n    delete item._id;\n    delete item._msgid;\n});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 120,
+        "wires": [
+            [
+                "a1a3169a21b250f5"
+            ]
+        ]
+    },
+    {
+        "id": "ed2c6624f3efe559",
+        "type": "debug",
+        "z": "2703d8db364dec0a",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "fcce91297ce6d637",
+        "type": "ui_switch",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "label": "Apply Filters",
+        "tooltip": "",
+        "group": "f37759dda49c514b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 390,
+        "y": 340,
+        "wires": [
+            [
+                "575ab0285a6cd07d",
+                "ba07d53fbf9ab633"
+            ]
+        ]
+    },
+    {
+        "id": "8f21a1afda944f5f",
+        "type": "ui_date_picker",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "label": "date",
+        "group": "183ef49fa701a122",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 370,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba07d53fbf9ab633",
+        "type": "function",
+        "z": "2703d8db364dec0a",
+        "name": "show_filters",
+        "func": "if(msg.payload){\n    msg.payload = {\"group\":{\"show\":[\"Emergency_Filters\"]}};\n}else{\n    msg.payload = {\"group\":{\"hide\":[\"Emergency_Filters\"]}};\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "68376bb92b65d424"
+            ]
+        ]
+    },
+    {
+        "id": "68376bb92b65d424",
+        "type": "ui_ui_control",
+        "z": "2703d8db364dec0a",
+        "name": "",
+        "events": "all",
+        "x": 700,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    }
+]
