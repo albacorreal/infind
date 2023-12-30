@@ -1,3 +1,5 @@
+#include <LoRa.h>
+
 //Libraries
 #include <string>
 #include <ArduinoJson.h> 
@@ -10,8 +12,6 @@
 #endif
 
 #include <Wire.h>
-//#include <Adafruit_BMP085.h>
-//#define seaLevelPressure_hPa 1013.25
 #include <Adafruit_MPU6050.h> // Acelerometro
 #include <Adafruit_Sensor.h>
 
@@ -20,17 +20,22 @@
 #include <queue>
 
 // LoRa
-
 #include <SPI.h>
 #include <LoRa.h>
-//define the pins used by the transceiver module
 #define ss 5
 #define rst 14
 #define dio0 2
 
+// Botones
+#include "Button2.h"
+Button2 button;
+
 // Sensors
 Adafruit_MPU6050 mpu;
-//Adafruit_BMP085 bmp;
+
+//Mqtt Client
+WiFiClient wClient;
+PubSubClient mqtt_client(wClient);
 
 // Update these with values suitable for your network.
 const String ssid = "infind";
@@ -45,17 +50,14 @@ int RSSI;
 String ID_PLACA;
 String conexion; // for LastWill & Testament
 String emergencia; // publish topic
-String data; //subscribe topic
+String data; //gps y estado rover
 
-//-----------------------------------------------------
 // ESP-NOW
 
-// MAC receptora ESP32 victor para ESP-NOW
-uint8_t broadcastAddress[] = {0x24, 0xDC, 0xC3, 0xA7, 0x31, 0x48};// REPLACE WITH RECEIVER MAC ADDRESS
+uint8_t broadcastAddress[] = {0x24, 0xDC, 0xC3, 0xA7, 0x31, 0x48};  // RECEIVER MAC ADDRESS
 
-String emergency_message; // DATOS QUE SE ENVIARAN A ROBER SENSOR
+String emergency_message; // DATOS QUE SE ENVIARAN A ROVER SENSOR
 char dataRcv[15];
-uint MAX_SIZE = ;
 
 // callbacks for sending and receiving data
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -94,14 +96,75 @@ void conecta_wifi() {
   Serial.println("WiFi connected, ip address: " + IP);
 }
 //-----------------------------------------------------
+//  Set Up Client-Broker Connection
+void conecta_mqtt() {
+  // Loop until we're reconnected
+  while (!mqtt_client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    //                                                                                WillTopic    , WillQoS, WillRetain, WillMessage
+    if (mqtt_client.connect(ID_PLACA.c_str(), mqtt_user.c_str(), mqtt_pass.c_str(),conexion.c_str(),       0,    true   ,"{\"online\":false}")) {
+      Serial.println(" conectado a broker: " + mqtt_server);
+      mqtt_client.subscribe(data.c_str());
+    } else {
+      Serial.println("ERROR:"+ String(mqtt_client.state()) +" reintento en 5s" );
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
+  
+}
+
+// Botones
+
+int muestra;
+
+void singleClick(Button2& btn) {
+    Serial.println("click\n");
+}
+void longClickDetected(Button2& btn) {
+    Serial.println("long click detected");
+}
+void longClick(Button2& btn) {
+    Serial.println("long click\n");
+}
+void doubleClick(Button2& btn) {
+    Serial.println("double click\n");
+}
+void tripleClick(Button2& btn) {
+    Serial.println("triple click\n");
+}
+
+//   deserializeJson(root, respuesta);
+//   *max_temp = root["max_temp"];
+//   *min_temp = root["min_temp"];
+
+// RECIBIR POR LoRa------------------------------------
 
 
+
+void onReceiveLoRa () // int packetSize?
+{
+
+  String LoRaData = LoRa.readString();
+
+  StaticJsonDocument<64> root;
+  deserializeJson(root, LoRaData);
+
+  latitude = root["Latitude"];
+  longitude = root["Longitude"];
+  timestamp = root["Timestamp"];
+
+
+}
+// --------------------------------------------------------
 
 void setup() {
   // Start Up Serial Communication
   Serial.begin(115200);
   Serial.println();
   Serial.println("Empieza setup LoRa...");
+  Serial.println("Empieza setup MQTT...");
   
   // ID de la placa
   #ifdef ESP32
@@ -116,20 +179,32 @@ void setup() {
     ID_PLACA = "ESP_" + String(ESP.getChipId());
   #endif
 
-//    // Topics
-//   conexion = "infind/GRUPO15/conexion";
-//   data = "infind/GRUPO15/led/cmd";
-//   ubicacionGPS = "infind/GRUPO15/...";
-//   emergencia = "infind/GRUPO15/...";  // Emergencia caida, terremoto, carro lleno de muestras
+   // Topics
+  conexion = "infind/GRUPO15/conexion";
+  data = "infind/GRUPO15/led/cmd";
+  ubicacionGPS = "infind/GRUPO15/...";
+  emergencia = "infind/GRUPO15/...";  // Emergencia caida, terremoto, carro lleno de muestras
 
-//   conecta_wifi();   //establecemos conexión wifi
+  conecta_wifi();   //establecemos conexión wifi
 
-/*
-  if (!bmp.begin()) {
-  Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
-  //while (1) {}
-  }
-*/
+  //Configuraciones del cliente mqtt
+  mqtt_client.setServer(mqtt_server.c_str(), 1883);
+  mqtt_client.setBufferSize(512); // para poder enviar mensajes de hasta X bytes
+  //mqtt_client.setCallback(callback);  //para procesar los mensajes cada vez que llegue uno al topic que estamos suscritos.
+
+  conecta_mqtt(); //establecemos la conexión del cliente con el servidor
+
+  //Mensaje formateado en JSON con el estado de conexión a true
+  String mensaje="{\"online\": ""true"" }";
+  
+  //Imprimimos mensaje y topic en el monitor serie
+  Serial.println();
+  Serial.println("Topic   : "+ conexion);
+  Serial.println("Payload : "+ mensaje);
+ 
+ //Publicamos el mensaje
+  mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
+
   Serial.println("Adafruit MPU6050 test!");
   // Try to initialize!
   if (!mpu.begin()) {
@@ -203,10 +278,8 @@ void setup() {
   Serial.println("Identificador placa: "+ ID_PLACA);
   Serial.println("Termina setup en " +  String(millis()) + " ms");
 
-//-----------------------------------------------------------
+
 //SET-UP ESP-NOW
-// Init Serial Monitor
- 	//Serial.begin(115200);
 
  	// Set device as a Wi-Fi Station
  	WiFi.mode(WIFI_STA);
@@ -235,7 +308,8 @@ void setup() {
  			return;
  	}
 
-  //-----------------------------------------------------------
+
+
   // SET-UP LoRa Sender
    Serial.begin(115200);
   while (!Serial);
@@ -259,29 +333,42 @@ void setup() {
   LoRa.setSyncWord(0xF3);
   Serial.println("LoRa Initializing OK!");
 
+// Botones
+  button.begin(BUTTON_PIN);
+  button.setClickHandler(singleClick);
+  button.setLongClickHandler(longClick);
+  button.setDoubleClickHandler(doubleClick);
+  button.setTripleClickHandler(tripleClick);
+
+  muestra = 0;
 
 }
 
-//-----------------------------------------------
+
+
+
 unsigned long ultimo_mensaje = 0;
 
 void loop() {
-//  if (!mqtt_client.connected())  //si no está conectado el cliente al broker
-//   {
-//     conecta_mqtt();   //establecemos la conexión
 
-//     //Mensaje formateado en JSON con el estado de conexión a true
-//     String mensaje = "{\"online\": ""true"" }";
+  button.loop();
 
-//     //Imprimimos mensaje y topic en el monitor serie
-//     Serial.println();
-//     Serial.println("Topic   : "+ conexion);
-//     Serial.println("Payload : "+ mensaje);
+ if (!mqtt_client.connected())  //si no está conectado el cliente al broker
+  {
+    conecta_mqtt();   //establecemos la conexión
 
-//     //Publicamos el mensaje
-//     mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
-//   }
-//   mqtt_client.loop(); // esta llamada para que la librería recupere el control
+    //Mensaje formateado en JSON con el estado de conexión a true
+    String mensaje = "{\"online\": ""true"" }";
+
+    //Imprimimos mensaje y topic en el monitor serie
+    Serial.println();
+    Serial.println("Topic   : "+ conexion);
+    Serial.println("Payload : "+ mensaje);
+
+    //Publicamos el mensaje
+    mqtt_client.publish(conexion.c_str(), mensaje.c_str(),true);
+  }
+  mqtt_client.loop(); // esta llamada para que la librería recupere el control
 
   unsigned long ahora = millis();
     
@@ -291,18 +378,51 @@ void loop() {
 
 // ENVIAR POR ESP-NOW A ROVER SENSOR  
 
+  if (singleClick(Button2& btn)){ // Aumentamos número demuestras recogidas al pulsar
+    muestra++;
+
+    // Encendemos led indicando que se está recogiendo una muestra
+    digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+    delay(1000);                      // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+    delay(1000);  
+                        // wait for a second
+
+    root["Sender"] = "";
+    root["RoverId"] = "Actuator";
+    root["Timestamp"] =  ;
+    root["Latitude"] = ;
+    root["Longitude"] = ;
+    root["Status"] = "Task finished. Avaliable" ;
+    serializeJson(root,msg);
+    Serial.println(msg);
+
+    // LoRa Sender
+    Serial.print("Sending packet: ");
+    //Send LoRa packet to receiver
+    LoRa.beginPacket();
+    LoRa.print(msg);
+    LoRa.endPacket();
+
+    delay(1000);
+
+  }
+
+
+
 // Set values to send
-  if(a.acceleration.z > 12 AND (ahora - ultimo_mensaje_terremoto >= 30000)){
+  if( abs(a.acceleration.z > 15) AND (ahora - ultimo_mensaje_terremoto >= 1000)){
 
       // ESP-NOW
       String msg;
       StaticJsonDocument<64> root;
+
+      root["Sender"] = "";
       root["RoverId"] = "Actuator";
-      root["ErrCode"] = "1";
+      root["Timestamp"] =  ;
       root["Latitude"] = ;
       root["Longitude"] = ;
-      root["Status"] = "Error" ;
-      root["Timestamp"] =  ;
+      root["Status"] = "Emergency state" ;
       serializeJson(root,msg);
       Serial.println(msg);
 
@@ -315,64 +435,25 @@ void loop() {
       // LoRa Sender
 
         Serial.print("Sending packet: ");
-        //Serial.println(counter);
-
         //Send LoRa packet to receiver
         LoRa.beginPacket();
-        LoRa.print("hello ");
-        //LoRa.print(counter);
+        LoRa.print(msg);
         LoRa.endPacket();
 
-        delay(10000);
+        delay(1000);
 
   }
 
-  if(a.acceleration.z > (18) AND (ahora - ultimo_mensaje_caida >= 30000)){
+  if( longClickDetected(Button2& btn) ){ // Sin bateria, volver a la estación de carga
 
       String msg;
       StaticJsonDocument<64> root;
+      root["Sender"] = "";
       root["RoverId"] = "Actuator";
-      root["ErrCode"] = "2";
+      root["Timestamp"] =  ;
       root["Latitude"] = ;
       root["Longitude"] = ;
-      root["Status"] = "Error" ;
-      root["Timestamp"] =  ;
-      serializeJson(root,msg);
-      Serial.println(msg);
-
-
-      char emergency_message[MAX_SIZE]
-     	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
-      // Send message via ESP-NOW
- 	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
-
-      // LoRa Sender
-
-      Serial.print("Sending packet: ");
-      //Serial.println(counter);
-
-      //Send LoRa packet to receiver
-       LoRa.beginPacket();
-       LoRa.print("hello ");
-        //LoRa.print(counter);
-      LoRa.endPacket();
-
-      delay(10000);
-
-
-
-  }
-  
-  if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje_carro >= 30000)){
-
-      String msg;
-      StaticJsonDocument<64> root;
-      root["RoverId"] = "Actuator";
-      root["ErrCode"] = "3";
-      root["Latitude"] = ;
-      root["Longitude"] = ;
-      root["Status"] = "Error" ;
-      root["Timestamp"] =  ;
+      root["Status"] = "Emergency state" ;
       serializeJson(root,msg);
       Serial.println(msg);
 
@@ -389,11 +470,43 @@ void loop() {
 
       //Send LoRa packet to receiver
       LoRa.beginPacket();
-      LoRa.print("hello ");
-      //LoRa.print(counter);
+      LoRa.print(msg);
       LoRa.endPacket();
 
-      delay(10000);
+      delay(1000);
+
+  }
+
+  if ( muestra < 5 AND (ahora - ultimo_mensaje_carro >= 1000)){
+
+      String msg;
+      StaticJsonDocument<64> root;
+      root["Sender"] = "";
+      root["RoverId"] = "Actuator";
+      root["Timestamp"] =  ;
+      root["Latitude"] = ;
+      root["Longitude"] = ;
+      root["Status"] = "Emergency state" ;
+      serializeJson(root,msg);
+      Serial.println(msg);
+
+
+      char emergency_message[MAX_SIZE]
+     	strcpy(emergency_message, msg.c_str(), MAX_SIZE);
+      // Send message via ESP-NOW
+ 	    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &emergency_message, sizeof(emergency_message));
+
+      // LoRa Sender
+
+      Serial.print("Sending packet: ");
+      //Serial.println(counter);
+
+      //Send LoRa packet to receiver
+      LoRa.beginPacket();
+      LoRa.print(msg);
+      LoRa.endPacket();
+
+      delay(1000);
   }
 
  	delay(1000);
@@ -401,20 +514,197 @@ void loop() {
   // LoRa reciver
 
   int packetSize = LoRa.parsePacket();
-  if (packetSize) {
-    // received a packet
+
+  if(packetSize) // si recibimos por LoRa
+  {
+
     Serial.print("Received packet '");
 
-    // read packet
-    while (LoRa.available()) {
-      String LoRaData = LoRa.readString();
-      Serial.print(LoRaData); 
-    }
+    onReceiveLoRa();
 
-    // print RSSI of packet
-    Serial.print("' with RSSI ");
-    Serial.println(LoRa.packetRssi());
+    Serial.println("Timestamp   : "+ Timestamp);
+    Serial.println("Target Latitude   : "+ Latitude);
+    Serial.println("Target Longitude   : "+ Longitude);
 
-}
+    // ¿ENCENDER LED DE QUE HEMOS RECIBIDO POR LORA?
 
+    // digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+    // delay(1000);                      // wait for a second
+    // digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+    // delay(1000);                      // wait for a second
+
+
+  }
+
+
+//   int packetSize = LoRa.parsePacket();
+//   if (packetSize) {
+//     // received a packet
+//     Serial.print("Received packet '");
+
+//     // read packet
+//     while (LoRa.available()) {
+//       String LoRaData = LoRa.readString();
+//       Serial.print(LoRaData); 
+//     }
+
+//     // print RSSI of packet
+//     Serial.print("' with RSSI ");
+//     Serial.println(LoRa.packetRssi());
+
+
+
+//PUBLICAR POR MQTT----------------------------
+
+    // if ( a.acceleration.z > 12 AND (ahora - ultimo_mensaje_terremoto >= 30000)){  // CONDICIONES PARA QUE SE DE UN TERREMOTO
+    //   //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
+    //   String mensaje = "{\"Emergencia\": ""TERREMOTO "" + "\"Acelerometro\": +    }";
+    
+    //   //Imprimimos el mensaje en el monitor serie
+    //   Serial.println();
+    //   Serial.println("Topic   : "+ emergencia);
+    //   Serial.println("Payload : "+ mensaje);
+
+    //   sensors_event_t a, g, temp;
+    //   mpu.getEvent(&a, &g, &temp);
+
+    //   //Print out the values 
+    //   Serial.print("Acceleration X: ");
+    //   Serial.print(a.acceleration.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(a.acceleration.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(a.acceleration.z);
+    //   Serial.println(" m/s^2");
+
+    //   Serial.print("Rotation X: ");
+    //   Serial.print(g.gyro.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(g.gyro.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(g.gyro.z);
+    //   Serial.println(" rad/s");
+
+    //   Serial.print("Temperature: ");
+    //   Serial.print(temp.temperature);
+    //   Serial.println(" degC");
+
+    // }
+
+    //     if ( a.acceleration.z < -18 AND (ahora - ultimo_mensaje_caida >= 30000)){  //CONDICIONES PARA QUE SE DE UNA CAIDA DEL ROVER
+    //   //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
+    //   String mensaje = "{\"Emergencia\": ""CAIDA DEL ROBOT ACTUADOR "" + "\"Acelerometro\": +    }";
+    
+    //   //Imprimimos el mensaje en el monitor serie
+    //   Serial.println();
+    //   Serial.println("Topic   : "+ emergencia);
+    //   Serial.println("Payload : "+ mensaje);
+
+    //   sensors_event_t a, g, temp;
+    //   mpu.getEvent(&a, &g, &temp);
+
+    //   //Print out the values 
+    //   Serial.print("Acceleration X: ");
+    //   Serial.print(a.acceleration.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(a.acceleration.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(a.acceleration.z);
+    //   Serial.println(" m/s^2");
+
+    //   Serial.print("Rotation X: ");
+    //   Serial.print(g.gyro.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(g.gyro.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(g.gyro.z);
+    //   Serial.println(" rad/s");
+
+    //   Serial.print("Temperature: ");
+    //   Serial.print(temp.temperature);
+    //   Serial.println(" degC");
+
+    // }
+
+    //      // lleno cuando llegue a X ubicaciones indicadas por RASPB 
+    //     if (CONDICIONES PARA QUE CARRO DE MUESTRAS LLENO AND (ahora - ultimo_mensaje_carro >= 30000)){
+    //   //Mensaje formateado en JSON con los datos de los sensores y de conexión Wifi 
+    //   String mensaje = "{\"Emergencia\": ""CAIDA DEL ROBOT ACTUADOR "" + "\"Acelerometro\": +    }";
+    
+    //   //Imprimimos el mensaje en el monitor serie
+    //   Serial.println();
+    //   Serial.println("Topic   : "+ emergencia);
+    //   Serial.println("Payload : "+ mensaje);
+
+    //   sensors_event_t a, g, temp;
+    //   mpu.getEvent(&a, &g, &temp);
+
+    //   //Print out the values 
+    //   Serial.print("Acceleration X: ");
+    //   Serial.print(a.acceleration.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(a.acceleration.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(a.acceleration.z);
+    //   Serial.println(" m/s^2");
+
+    //   Serial.print("Rotation X: ");
+    //   Serial.print(g.gyro.x);
+    //   Serial.print(", Y: ");
+    //   Serial.print(g.gyro.y);
+    //   Serial.print(", Z: ");
+    //   Serial.print(g.gyro.z);
+    //   Serial.println(" rad/s");
+
+    //   Serial.print("Temperature: ");
+    //   Serial.print(temp.temperature);
+    //   Serial.println(" degC");
+
+    // }
+
+
+    // Serial.println("");
+    // delay(500);
+   
+    // //Publicamos el mensaje
+    // mqtt_client.publish(       DATOS A ENVIAR               .c_str(), mensaje.c_str());
+
+
+
+
+    
+//-----------------------------------------------------------
+// deserializeJson
+//-----------------------------------------------------------
+// void deserializeJSON (String respuesta, int* max_temp, int* min_temp)
+// {
+//   StaticJsonDocument<128> root;
+//   deserializeJson(root, respuesta);
+//   *max_temp = root["max_temp"];
+//   *min_temp = root["min_temp"];
+// }
+
+//-----------------------------------------------------------
+// serializeJson
+//-----------------------------------------------------------
+// void serializeObject(String * mensaje) {
+  
+//     StaticJsonDocument<1024>doc;
+//     //doc["MAC"] = 
+//     //doc["Time"] = 
+//     //doc["GPS"] = 
+//     //doc["Pressure"] =
+//     //doc["Radiation"] = 
+//     //doc["Altitude"]
+//     //doc["Temperature"]
+//     //doc["Humidity"]
+//     doc["accelerometer"]["acceleration"]["x"] = 
+//     doc["accelerometer"]["acceleration"]["y"] = 
+//     doc["accelerometer"]["acceleration"]["z"] = 
+//     doc["accelerometer"]["gyro"]["x"] = 
+//     doc["accelerometer"]["gyro"]["y"] = 
+//     doc["accelerometer"]["gyro"]["z"] = 
+
+//     serializeJson(doc,mensaje);
+// }
 
