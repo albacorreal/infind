@@ -31,7 +31,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 150,
-        "y": 960,
+        "y": 1220,
         "wires": [
             [
                 "c7c6ed94528bf87f"
@@ -52,7 +52,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 140,
-        "y": 460,
+        "y": 480,
         "wires": [
             [
                 "fba2a1b48bfa3a33",
@@ -74,7 +74,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 150,
-        "y": 820,
+        "y": 980,
         "wires": [
             [
                 "5d08094cc6f56fce",
@@ -115,7 +115,7 @@
         "mapopt": "",
         "mapwms": false,
         "x": 1370,
-        "y": 940,
+        "y": 1020,
         "wires": []
     },
     {
@@ -130,7 +130,7 @@
         "finalize": "",
         "libs": [],
         "x": 1020,
-        "y": 860,
+        "y": 1020,
         "wires": [
             [
                 "34ecc408b945a1ec"
@@ -151,8 +151,8 @@
         "correl": "",
         "expiry": "",
         "broker": "8fc82196e3fa113b",
-        "x": 930,
-        "y": 1380,
+        "x": 950,
+        "y": 1880,
         "wires": []
     },
     {
@@ -166,8 +166,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 1380,
+        "x": 590,
+        "y": 1880,
         "wires": [
             [
                 "32921e52246080cc"
@@ -195,8 +195,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 400,
-        "y": 1380,
+        "x": 420,
+        "y": 1880,
         "wires": [
             [
                 "5274f74e5a66f298"
@@ -215,7 +215,7 @@
         "multi": false,
         "operation": "store",
         "x": 560,
-        "y": 820,
+        "y": 980,
         "wires": []
     },
     {
@@ -227,7 +227,7 @@
         "collection": "Rovers",
         "operation": "find",
         "x": 780,
-        "y": 860,
+        "y": 1020,
         "wires": [
             [
                 "c76086b0ebe20510"
@@ -243,11 +243,12 @@
         "collection": "Sensors",
         "operation": "find",
         "x": 620,
-        "y": 1020,
+        "y": 1280,
         "wires": [
             [
                 "a179ac947f3439c0",
-                "1cc8a83ddf39da73"
+                "1cc8a83ddf39da73",
+                "f879dc62f302616b"
             ]
         ]
     },
@@ -263,7 +264,7 @@
         "finalize": "",
         "libs": [],
         "x": 520,
-        "y": 860,
+        "y": 1020,
         "wires": [
             [
                 "0f4b74568deb7841"
@@ -282,7 +283,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 1020,
+        "y": 1280,
         "wires": [
             [
                 "af4d2afc3ab8a78f"
@@ -297,8 +298,8 @@
         "name": "",
         "collection": "Rovers",
         "operation": "find",
-        "x": 590,
-        "y": 1720,
+        "x": 610,
+        "y": 2220,
         "wires": [
             [
                 "316259445f156164"
@@ -326,8 +327,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1720,
+        "x": 410,
+        "y": 2220,
         "wires": [
             [
                 "ced3cd3cea02c595"
@@ -347,8 +348,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 1720,
+        "x": 840,
+        "y": 2220,
         "wires": []
     },
     {
@@ -363,7 +364,7 @@
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 820,
+        "y": 980,
         "wires": [
             [
                 "42abf74e5a08674a"
@@ -388,7 +389,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 340,
-        "y": 860,
+        "y": 1020,
         "wires": [
             [
                 "30d73379570e3a72"
@@ -407,7 +408,7 @@
         "finalize": "",
         "libs": [],
         "x": 1020,
-        "y": 960,
+        "y": 1220,
         "wires": [
             [
                 "34ecc408b945a1ec"
@@ -428,8 +429,8 @@
         "correl": "",
         "expiry": "",
         "broker": "8fc82196e3fa113b",
-        "x": 930,
-        "y": 1420,
+        "x": 950,
+        "y": 1920,
         "wires": []
     },
     {
@@ -437,14 +438,14 @@
         "type": "function",
         "z": "c0d83d5b56c5e4a4",
         "name": "sensor_msg",
-        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Sensor\",\n    \"Timestamp\": timestamp,\n    \"Latitude\":\"57.2\",\n    \"Longitude\":\"-1.35\",\n    \"Altitude\":250,\n    \"Temperature\":\"21.8\",\n    \"Humidity\":\"45%\",\n    \"Pressure\": \"1024\",\n    \"Radiation\":\"0\"\n}\nreturn msg;",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Sensor\",\n    \"Timestamp\": timestamp,\n    \"Latitude\":\"57.2\",\n    \"Longitude\":\"-1.35\",\n    \"Altitude\":250,\n    \"Temperature\":21.8,\n    \"Humidity\":\"45%\",\n    \"Pressure\": \"1024\",\n    \"Radiation\":\"0\"\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 1420,
+        "x": 590,
+        "y": 1920,
         "wires": [
             [
                 "ec3b307e11078dc1"
@@ -472,8 +473,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 400,
-        "y": 1420,
+        "x": 420,
+        "y": 1920,
         "wires": [
             [
                 "e9befdbdac0545d4"
@@ -491,8 +492,8 @@
         "upsert": false,
         "multi": false,
         "operation": "delete",
-        "x": 610,
-        "y": 1540,
+        "x": 630,
+        "y": 2040,
         "wires": []
     },
     {
@@ -516,8 +517,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1540,
+        "x": 410,
+        "y": 2040,
         "wires": [
             [
                 "6d720441341ac798"
@@ -536,7 +537,7 @@
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 960,
+        "y": 1220,
         "wires": [
             [
                 "26449bc94b39359f"
@@ -555,7 +556,7 @@
         "multi": false,
         "operation": "store",
         "x": 580,
-        "y": 960,
+        "y": 1220,
         "wires": []
     },
     {
@@ -569,8 +570,8 @@
         "upsert": false,
         "multi": false,
         "operation": "delete",
-        "x": 610,
-        "y": 1580,
+        "x": 630,
+        "y": 2080,
         "wires": []
     },
     {
@@ -594,8 +595,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1580,
+        "x": 410,
+        "y": 2080,
         "wires": [
             [
                 "ae9f5f1273747ec2"
@@ -610,8 +611,8 @@
         "name": "",
         "collection": "Sensors",
         "operation": "find",
-        "x": 590,
-        "y": 1760,
+        "x": 610,
+        "y": 2260,
         "wires": [
             [
                 "bade907282716f40"
@@ -639,8 +640,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1760,
+        "x": 410,
+        "y": 2260,
         "wires": [
             [
                 "1d588e178b9627d5"
@@ -660,8 +661,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 1760,
+        "x": 840,
+        "y": 2260,
         "wires": []
     },
     {
@@ -685,8 +686,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1030,
-        "y": 740,
+        "x": 1290,
+        "y": 960,
         "wires": [
             [
                 "b181b28bea36c7c3"
@@ -704,8 +705,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1220,
-        "y": 740,
+        "x": 1480,
+        "y": 960,
         "wires": [
             [
                 "34ecc408b945a1ec"
@@ -724,7 +725,7 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 460,
+        "y": 480,
         "wires": [
             [
                 "b5073cb3ceb52a17"
@@ -736,14 +737,14 @@
         "type": "function",
         "z": "c0d83d5b56c5e4a4",
         "name": "status_msg",
-        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": 20000000032342,\n    \"Status\":\"Sample Overflow\"\n}\nreturn msg;",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": 30,\n    \"Status\":\"Sample Overflow\"\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 1340,
+        "x": 590,
+        "y": 1840,
         "wires": [
             [
                 "f10f54f93f0621d4"
@@ -771,8 +772,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 400,
-        "y": 1340,
+        "x": 420,
+        "y": 1840,
         "wires": [
             [
                 "8fe282dc79d64bf9"
@@ -793,8 +794,8 @@
         "correl": "",
         "expiry": "",
         "broker": "8fc82196e3fa113b",
-        "x": 940,
-        "y": 1340,
+        "x": 960,
+        "y": 1840,
         "wires": []
     },
     {
@@ -829,8 +830,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 1300,
+        "x": 600,
+        "y": 1800,
         "wires": [
             [
                 "3976afb7b98cb391"
@@ -858,8 +859,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 400,
-        "y": 1300,
+        "x": 420,
+        "y": 1800,
         "wires": [
             [
                 "9c6a7d0cec22e787"
@@ -880,8 +881,8 @@
         "correl": "",
         "expiry": "",
         "broker": "8fc82196e3fa113b",
-        "x": 940,
-        "y": 1300,
+        "x": 960,
+        "y": 1800,
         "wires": []
     },
     {
@@ -895,8 +896,8 @@
         "upsert": false,
         "multi": false,
         "operation": "delete",
-        "x": 620,
-        "y": 1500,
+        "x": 640,
+        "y": 2000,
         "wires": []
     },
     {
@@ -920,8 +921,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1500,
+        "x": 410,
+        "y": 2000,
         "wires": [
             [
                 "4ff5652bbcb9af69"
@@ -939,8 +940,8 @@
         "upsert": false,
         "multi": false,
         "operation": "delete",
-        "x": 610,
-        "y": 1460,
+        "x": 630,
+        "y": 1960,
         "wires": []
     },
     {
@@ -964,8 +965,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1460,
+        "x": 410,
+        "y": 1960,
         "wires": [
             [
                 "31c41258b8aad036"
@@ -980,8 +981,8 @@
         "name": "",
         "collection": "Emergency",
         "operation": "find",
-        "x": 600,
-        "y": 1680,
+        "x": 620,
+        "y": 2180,
         "wires": [
             [
                 "ba7ec485d75e48f1"
@@ -1009,8 +1010,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1680,
+        "x": 410,
+        "y": 2180,
         "wires": [
             [
                 "a8d8a0f793147271"
@@ -1030,8 +1031,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 1680,
+        "x": 840,
+        "y": 2180,
         "wires": []
     },
     {
@@ -1042,8 +1043,8 @@
         "name": "",
         "collection": "Commands",
         "operation": "find",
-        "x": 590,
-        "y": 1640,
+        "x": 610,
+        "y": 2140,
         "wires": [
             [
                 "092db928bed98d5a"
@@ -1071,8 +1072,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 390,
-        "y": 1640,
+        "x": 410,
+        "y": 2140,
         "wires": [
             [
                 "3ffdfeae1b119e63"
@@ -1092,8 +1093,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 1640,
+        "x": 840,
+        "y": 2140,
         "wires": []
     },
     {
@@ -1112,7 +1113,7 @@
         "topic": "⚠ An emergency has occurred ⚠",
         "name": "Error",
         "x": 490,
-        "y": 520,
+        "y": 540,
         "wires": [
             [
                 "eabc40158e4c7494"
@@ -1131,7 +1132,7 @@
         "multi": false,
         "operation": "store",
         "x": 530,
-        "y": 460,
+        "y": 480,
         "wires": []
     },
     {
@@ -1146,7 +1147,7 @@
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 520,
+        "y": 540,
         "wires": [
             [
                 "10171dcbb4137f1f"
@@ -1158,14 +1159,14 @@
         "type": "function",
         "z": "c0d83d5b56c5e4a4",
         "name": "emergency_query",
-        "func": "var filterEmergency = flow.get(\"applyEmergency\");\nvar timestamp = flow.get(\"emergencyDate\");\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\n\n\nif (filterEmergency) {\n    msg.payload = { \"Date\": msg.Date };\n        return msg;\n\n    \n}\nif (msg.payload || !filterEmergency ){\n    msg.payload = {};   \n    return msg;\n\n}\n\n\n\n\n\n    \n",
+        "func": "var filterEmergency = flow.get(\"applyEmergency\");\nvar filterRoverEmergency = flow.get(\"emergencyRover\");\nvar enableEmergencyDate = flow.get(\"enableEmergencyDate\");\nvar timestamp = flow.get(\"emergencyDate\");\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\n\nmsg.payload = {};\n\nif (filterEmergency){\n    if ( enableEmergencyDate) {\n        \n        msg.payload = { \"Date\": msg.Date };\n            return msg;\n        \n        \n    } if (filterRoverEmergency == \"Actuator\" ) {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, msg.payload] };\n        return msg;\n\n    } else if (filterRoverEmergency == \"Sensor\" ) {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Sensor\" }, msg.payload] };\n        return msg;\n\n    } \n}\n\nif (msg.payload || !filterEmergency ){\n    msg.payload = {};   \n    return msg;\n\n}\n\n\n\n\n\n    \n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "b03455706654fa79"
@@ -1181,7 +1182,7 @@
         "collection": "Emergency",
         "operation": "find",
         "x": 630,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "6e038fcb6aa4f8a8"
@@ -1201,7 +1202,7 @@
         "outputs": 0,
         "cts": false,
         "x": 1090,
-        "y": 580,
+        "y": 600,
         "wires": []
     },
     {
@@ -1216,7 +1217,7 @@
         "finalize": "",
         "libs": [],
         "x": 890,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "1ffe8f911a24c884"
@@ -1235,7 +1236,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 520,
+        "y": 540,
         "wires": [
             [
                 "d0188dbdc54d0c97"
@@ -1249,7 +1250,7 @@
         "name": "",
         "events": "all",
         "x": 820,
-        "y": 520,
+        "y": 540,
         "wires": [
             []
         ]
@@ -1294,7 +1295,7 @@
         "type": "function",
         "z": "c0d83d5b56c5e4a4",
         "name": "commands_query",
-        "func": "var filterCommands = flow.get(\"applyCommands\");\n\nvar timestamp = flow.get(\"commandsDate\");\n\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\n\n\nif (filterCommands) {\n    msg.payload = { \"Date\": msg.Date };\n    return msg;\n\n} \nif (msg.payload || !filterCommands) {\n\n    msg.payload = {};\n    return msg;\n}",
+        "func": "var filterCommands = flow.get(\"applyCommands\");\nvar filterRoverCommands = flow.get(\"RoverCommands\");\nvar timestamp = flow.get(\"commandsDate\");\nvar enableCommandsDate = flow.get(\"enableCommandsDate\");\n\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\nmsg.payload ={};\n\nif (filterCommands)\n{\n    if (enableCommandsDate) {\n\n        msg.payload = { \"Date\": msg.Date };\n        return msg;\n\n    }\n    if (filterRoverCommands == \"Actuator\") {\n\n        //msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, { \"Date\": msg.Date }] };\n        msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, msg.payload] };\n        return msg;\n\n    } else if (filterRoverCommands == \"Sensor\") {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Sensor\" }, msg.payload] };\n        return msg;\n    }\n}\n\nif (msg.payload || !filterCommands) {\n\n    msg.payload = {};\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1402,7 +1403,7 @@
         "animate": false,
         "className": "",
         "x": 150,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
                 "27970df4d41862c5",
@@ -1424,8 +1425,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 170,
-        "y": 640,
+        "x": 130,
+        "y": 800,
         "wires": [
             [
                 "d87f362e68946b07"
@@ -1444,7 +1445,7 @@
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
                 "99cb274ddc0e2491"
@@ -1458,7 +1459,7 @@
         "name": "",
         "events": "all",
         "x": 540,
-        "y": 700,
+        "y": 660,
         "wires": [
             []
         ]
@@ -1490,7 +1491,7 @@
         "animate": false,
         "className": "",
         "x": 150,
-        "y": 300,
+        "y": 220,
         "wires": [
             [
                 "ac2b52185e0df386",
@@ -1512,8 +1513,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 170,
-        "y": 240,
+        "x": 150,
+        "y": 340,
         "wires": [
             [
                 "b43ce1873adc99a8"
@@ -1547,7 +1548,7 @@
         "animate": false,
         "className": "",
         "x": 150,
-        "y": 1140,
+        "y": 1400,
         "wires": [
             [
                 "d59b1ae17d5cfe73",
@@ -1567,7 +1568,7 @@
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 1140,
+        "y": 1400,
         "wires": [
             [
                 "0163213869e57a9f"
@@ -1581,7 +1582,7 @@
         "name": "",
         "events": "all",
         "x": 540,
-        "y": 1140,
+        "y": 1400,
         "wires": [
             []
         ]
@@ -1599,7 +1600,7 @@
         "outputs": 0,
         "cts": false,
         "x": 1120,
-        "y": 1020,
+        "y": 1280,
         "wires": []
     },
     {
@@ -1614,7 +1615,7 @@
         "finalize": "",
         "libs": [],
         "x": 930,
-        "y": 1020,
+        "y": 1280,
         "wires": [
             [
                 "130837b1afd23e14"
@@ -1636,7 +1637,7 @@
         "topicType": "msg",
         "className": "",
         "x": 170,
-        "y": 1080,
+        "y": 1340,
         "wires": [
             [
                 "072b5353c7c7ed22"
@@ -1655,7 +1656,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 300,
+        "y": 220,
         "wires": [
             [
                 "6f9dda3671e55308"
@@ -1669,7 +1670,7 @@
         "name": "",
         "events": "all",
         "x": 640,
-        "y": 300,
+        "y": 220,
         "wires": [
             []
         ]
@@ -1694,7 +1695,7 @@
         "to": "",
         "reg": false,
         "x": 380,
-        "y": 1080,
+        "y": 1340,
         "wires": [
             []
         ]
@@ -1718,8 +1719,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 430,
-        "y": 240,
+        "x": 410,
+        "y": 340,
         "wires": [
             []
         ]
@@ -1744,7 +1745,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 740,
+        "y": 700,
         "wires": [
             []
         ]
@@ -1768,8 +1769,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 640,
+        "x": 330,
+        "y": 800,
         "wires": [
             []
         ]
@@ -1796,7 +1797,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 150,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "48185f0eb0aa2e59"
@@ -1852,7 +1853,7 @@
         "to": "",
         "reg": false,
         "x": 430,
-        "y": 340,
+        "y": 260,
         "wires": [
             []
         ]
@@ -1879,7 +1880,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 150,
-        "y": 1020,
+        "y": 1280,
         "wires": [
             [
                 "98d4f3eca15b01f5"
@@ -1906,9 +1907,292 @@
         "to": "",
         "reg": false,
         "x": 380,
-        "y": 1200,
+        "y": 1460,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "a2ba8afd8cdf975c",
+        "type": "ui_text_input",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Rover",
+        "tooltip": "",
+        "group": "9eaf520d8a23e190",
+        "order": 24,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 130,
+        "y": 860,
+        "wires": [
+            [
+                "4fb9484ae4b60e67"
+            ]
+        ]
+    },
+    {
+        "id": "4fb9484ae4b60e67",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "emergencyRover",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cbc0f319f02904d7",
+        "type": "ui_text_input",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Rover",
+        "tooltip": "",
+        "group": "cf20bfd785d9312b",
+        "order": 24,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "b82bc151735f7a42"
+            ]
+        ]
+    },
+    {
+        "id": "b82bc151735f7a42",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "RoverCommands",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9c4ab3149611797",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Date enable",
+        "tooltip": "",
+        "group": "cf20bfd785d9312b",
+        "order": 24,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "1472070b60dd605b"
+            ]
+        ]
+    },
+    {
+        "id": "1472070b60dd605b",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enableCommandsDate",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d73d4b36b330143",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Date enable",
+        "tooltip": "",
+        "group": "9eaf520d8a23e190",
+        "order": 24,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 740,
+        "wires": [
+            [
+                "b04062ad9309c231"
+            ]
+        ]
+    },
+    {
+        "id": "b04062ad9309c231",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enableEmergencyDate",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3a785b2bf8b1484",
+        "type": "ui_chart",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "group": "4c2baad09a9733db",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1130,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f879dc62f302616b",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "function 34",
+        "func": "for (var i = 0; i < msg.payload.lenght; i++){\n    msg.payload = msg.payload[i].Temperature;\n    return msg;\n} \n\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 1360,
+        "wires": [
+            [
+                "c3a785b2bf8b1484"
+            ]
         ]
     },
     {
