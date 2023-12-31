@@ -1,0 +1,2495 @@
+[
+    {
+        "id": "c0d83d5b56c5e4a4",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3a6c4599e04b315a",
+        "type": "comment",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "Dashboard",
+        "info": "",
+        "x": 160,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b3a70b2f54a409e1",
+        "type": "mqtt in",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8fc82196e3fa113b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1220,
+        "wires": [
+            [
+                "c7c6ed94528bf87f"
+            ]
+        ]
+    },
+    {
+        "id": "653e1a3e46a1a6d3",
+        "type": "mqtt in",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Emergency",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8fc82196e3fa113b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "fba2a1b48bfa3a33",
+                "3dfa14d5d88dfb80"
+            ]
+        ]
+    },
+    {
+        "id": "9448b3b8893cfcf7",
+        "type": "mqtt in",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Rovers",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8fc82196e3fa113b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 980,
+        "wires": [
+            [
+                "5d08094cc6f56fce",
+                "2fa8174d259d20fb",
+                "896df80568a631c9"
+            ]
+        ]
+    },
+    {
+        "id": "34ecc408b945a1ec",
+        "type": "ui_worldmap",
+        "z": "c0d83d5b56c5e4a4",
+        "group": "d79fae3f4ed001ad",
+        "order": 1,
+        "width": "12",
+        "height": "10",
+        "name": "Map",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1310,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "c76086b0ebe20510",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "map_data",
+        "func": "var query = msg.payload[0];\nmsg.payload = { \"name\": String(query._id), \"lat\": query.Latitude, \"lon\": query.Longitude, \"icon\": \"eyedropper\", \"iconColor\":\"#0000FF\",\"tooltip\": \"Sample taken\" }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 1020,
+        "wires": [
+            [
+                "34ecc408b945a1ec"
+            ]
+        ]
+    },
+    {
+        "id": "32921e52246080cc",
+        "type": "mqtt out",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Rovers",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8fc82196e3fa113b",
+        "x": 950,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "5274f74e5a66f298",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "status_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": timestamp,\n    \"Status\":\"Task finished\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1880,
+        "wires": [
+            [
+                "32921e52246080cc"
+            ]
+        ]
+    },
+    {
+        "id": "bf7bd12fada4dd84",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 1880,
+        "wires": [
+            [
+                "5274f74e5a66f298"
+            ]
+        ]
+    },
+    {
+        "id": "42abf74e5a08674a",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 560,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "0f4b74568deb7841",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 780,
+        "y": 1020,
+        "wires": [
+            [
+                "c76086b0ebe20510"
+            ]
+        ]
+    },
+    {
+        "id": "af4d2afc3ab8a78f",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "operation": "find",
+        "x": 580,
+        "y": 1280,
+        "wires": [
+            [
+                "f879dc62f302616b",
+                "49215d1496e0e640"
+            ]
+        ]
+    },
+    {
+        "id": "30d73379570e3a72",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "actuator_query",
+        "func": "\n\n    msg.payload = { '$and': [{ \"RoverId\": \"Actuator\" }, { \"Status\": \"Task finished\" }] }\n    msg.limit = 1;\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1020,
+        "wires": [
+            [
+                "0f4b74568deb7841"
+            ]
+        ]
+    },
+    {
+        "id": "98d4f3eca15b01f5",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "sensor_query",
+        "func": "var filterSensors = flow.get(\"applySensors\");\nvar timestamp = flow.get(\"sensorsDate\");\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\n\n\nif(filterSensors)\n{\n    msg.payload = { $and: [{ \"RoverId\": \"Sensor\"},{\"Date\": msg.Date}]};\n    return msg;\n}\nif(msg.payload || !filterSensors){\n    msg.payload = { \"RoverId\": \"Sensor\"};\n    return msg;\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1280,
+        "wires": [
+            [
+                "af4d2afc3ab8a78f"
+            ]
+        ]
+    },
+    {
+        "id": "ced3cd3cea02c595",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "operation": "find",
+        "x": 610,
+        "y": 2220,
+        "wires": [
+            [
+                "316259445f156164"
+            ]
+        ]
+    },
+    {
+        "id": "4273b1d1790532ad",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2220,
+        "wires": [
+            [
+                "ced3cd3cea02c595"
+            ]
+        ]
+    },
+    {
+        "id": "316259445f156164",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "5d08094cc6f56fce",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n\n\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);// + \" at \" + String(hours) + \":\" + String(minutes) + \":\" + String(seconds);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 980,
+        "wires": [
+            [
+                "42abf74e5a08674a"
+            ]
+        ]
+    },
+    {
+        "id": "2fa8174d259d20fb",
+        "type": "trigger",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 340,
+        "y": 1020,
+        "wires": [
+            [
+                "30d73379570e3a72"
+            ]
+        ]
+    },
+    {
+        "id": "a179ac947f3439c0",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "map_data",
+        "func": "var query = msg.payload[0];\nvar tooltip = \"Altitude: \" + String(query.Altitude)+\"\\n\";\ntooltip += \"Temperature: \" + String(query.Temperature)+\"\\n\";\ntooltip +=    \"Humidity: \" + String(query.Humidity)+\"\\n\";\ntooltip +=    \"Pressure: \" + String(query.Sensor) + \"\\n\";\nmsg.payload = { \"name\": String(query._id), \"lat\": query.Latitude, \"lon\": query.Longitude, \"icon\": \"tachometer\", \"iconColor\":\"#FF0000\",\"tooltip\": tooltip }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 1060,
+        "wires": [
+            [
+                "34ecc408b945a1ec"
+            ]
+        ]
+    },
+    {
+        "id": "ec3b307e11078dc1",
+        "type": "mqtt out",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Sensors",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8fc82196e3fa113b",
+        "x": 950,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "e9befdbdac0545d4",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "sensor_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Sensor\",\n    \"Timestamp\": timestamp,\n    \"Latitude\":\"57.2\",\n    \"Longitude\":\"-1.35\",\n    \"Altitude\":250,\n    \"Temperature\":21.8,\n    \"Humidity\": 45,\n    \"Pressure\": 1024,\n    \"Radiation\":\"0\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1920,
+        "wires": [
+            [
+                "ec3b307e11078dc1"
+            ]
+        ]
+    },
+    {
+        "id": "519ffdb2e1b32762",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 1920,
+        "wires": [
+            [
+                "e9befdbdac0545d4"
+            ]
+        ]
+    },
+    {
+        "id": "6d720441341ac798",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Rovers",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 630,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "d90b00d5224bcd79",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2040,
+        "wires": [
+            [
+                "6d720441341ac798"
+            ]
+        ]
+    },
+    {
+        "id": "c7c6ed94528bf87f",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\nvar hours = date.getHours();\nvar minutes = date.getMinutes();\nvar seconds = date.getSeconds();\n\n\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1220,
+        "wires": [
+            [
+                "26449bc94b39359f"
+            ]
+        ]
+    },
+    {
+        "id": "26449bc94b39359f",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 580,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ae9f5f1273747ec2",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 630,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "79e001f9d8b72a69",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2080,
+        "wires": [
+            [
+                "ae9f5f1273747ec2"
+            ]
+        ]
+    },
+    {
+        "id": "1d588e178b9627d5",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "operation": "find",
+        "x": 610,
+        "y": 2260,
+        "wires": [
+            [
+                "bade907282716f40"
+            ]
+        ]
+    },
+    {
+        "id": "7c1b5fe09b4cb640",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2260,
+        "wires": [
+            [
+                "1d588e178b9627d5"
+            ]
+        ]
+    },
+    {
+        "id": "bade907282716f40",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "a2b2667e7e9a33cd",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 830,
+        "y": 980,
+        "wires": [
+            [
+                "b181b28bea36c7c3"
+            ]
+        ]
+    },
+    {
+        "id": "b181b28bea36c7c3",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "map_data",
+        "func": "msg.payload = { \"name\": \"home\", \"lat\": 36.7, \"lon\": -4.42, \"icon\": \"home\", \"iconColor\":\"#000000\",\"tooltip\": \"home\" }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 980,
+        "wires": [
+            [
+                "34ecc408b945a1ec"
+            ]
+        ]
+    },
+    {
+        "id": "fba2a1b48bfa3a33",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n\n// Make a field \n\nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "b5073cb3ceb52a17"
+            ]
+        ]
+    },
+    {
+        "id": "8fe282dc79d64bf9",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "status_msg",
+        "func": "var tiempo = new Date();\nvar timestamp = tiempo.getDate();\nmsg.payload = {\n    \"Sender\":\"User\",\n    \"RoverId\":\"Actuator\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": 30,\n    \"Status\":\"Sample Overflow\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1840,
+        "wires": [
+            [
+                "f10f54f93f0621d4"
+            ]
+        ]
+    },
+    {
+        "id": "08f7c4bd9223728a",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 1840,
+        "wires": [
+            [
+                "8fe282dc79d64bf9"
+            ]
+        ]
+    },
+    {
+        "id": "f10f54f93f0621d4",
+        "type": "mqtt out",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Emergency",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8fc82196e3fa113b",
+        "x": 960,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "c13226e71d2e4642",
+        "type": "mqtt in",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Commands",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8fc82196e3fa113b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "7bacc2365fb4167a"
+            ]
+        ]
+    },
+    {
+        "id": "9c6a7d0cec22e787",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "command_msg",
+        "func": "msg.payload = {\n    \"Priority\": \"1\",\n    \"Sender\":\"User\",\n    \"RoverId\":\"Sensor\",\n    \"Latitude\":\"51.2\",\n    \"Longitude\":\"-1.35\",\n    \"Timestamp\": 23041,\n    \"Status\":\"Task finished\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1800,
+        "wires": [
+            [
+                "3976afb7b98cb391"
+            ]
+        ]
+    },
+    {
+        "id": "64b16fc19fd767b8",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 1800,
+        "wires": [
+            [
+                "9c6a7d0cec22e787"
+            ]
+        ]
+    },
+    {
+        "id": "3976afb7b98cb391",
+        "type": "mqtt out",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/Commands",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8fc82196e3fa113b",
+        "x": 960,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "4ff5652bbcb9af69",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 640,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "9510a2fa4bba5bf5",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2000,
+        "wires": [
+            [
+                "4ff5652bbcb9af69"
+            ]
+        ]
+    },
+    {
+        "id": "31c41258b8aad036",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 630,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "0b9e07d453835b95",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 1960,
+        "wires": [
+            [
+                "31c41258b8aad036"
+            ]
+        ]
+    },
+    {
+        "id": "a8d8a0f793147271",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "operation": "find",
+        "x": 620,
+        "y": 2180,
+        "wires": [
+            [
+                "ba7ec485d75e48f1"
+            ]
+        ]
+    },
+    {
+        "id": "c40e804e68dadef9",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2180,
+        "wires": [
+            [
+                "a8d8a0f793147271"
+            ]
+        ]
+    },
+    {
+        "id": "ba7ec485d75e48f1",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "3ffdfeae1b119e63",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "operation": "find",
+        "x": 610,
+        "y": 2140,
+        "wires": [
+            [
+                "092db928bed98d5a"
+            ]
+        ]
+    },
+    {
+        "id": "38e6d3beabc241aa",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 2140,
+        "wires": [
+            [
+                "3ffdfeae1b119e63"
+            ]
+        ]
+    },
+    {
+        "id": "092db928bed98d5a",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "10171dcbb4137f1f",
+        "type": "ui_toast",
+        "z": "c0d83d5b56c5e4a4",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "View emergencies",
+        "raw": false,
+        "className": "Error",
+        "topic": "⚠ An emergency has occurred ⚠",
+        "name": "Error",
+        "x": 490,
+        "y": 540,
+        "wires": [
+            [
+                "eabc40158e4c7494"
+            ]
+        ]
+    },
+    {
+        "id": "b5073cb3ceb52a17",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 530,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "3dfa14d5d88dfb80",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "error_msg",
+        "func": "msg = msg.payload;\nmsg.payload = msg.Status;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 540,
+        "wires": [
+            [
+                "10171dcbb4137f1f"
+            ]
+        ]
+    },
+    {
+        "id": "48185f0eb0aa2e59",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "emergency_query",
+        "func": "var applyFilter = flow.get(\"emergency.apply\");\nvar roverFilter = flow.get(\"emergency.rover\");\nvar enableDate = flow.get(\"emergency.enableDate\");\nvar timestamp = flow.get(\"emergency.date\");\n\n// Create a new Date object\nvar date = new Date(timestamp);\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1;\nvar day = date.getDate();\nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\n\nmsg.payload = {};\n\nif (applyFilter){\n    if ( enableDate) {\n        \n        msg.payload = { \"Date\": msg.Date };\n            return msg;\n        \n        \n    } if (roverFilter == \"Actuator\" ) {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, msg.payload] };\n        return msg;\n\n    } else if (roverFilter == \"Sensor\" ) {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Sensor\" }, msg.payload] };\n        return msg;\n\n    } \n}\n\nif (msg.payload || !applyFilter ){\n    msg.payload = {};   \n    return msg;\n\n}\n\n\n\n\n\n    \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 600,
+        "wires": [
+            [
+                "b03455706654fa79"
+            ]
+        ]
+    },
+    {
+        "id": "b03455706654fa79",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Emergency",
+        "operation": "find",
+        "x": 610,
+        "y": 600,
+        "wires": [
+            [
+                "6e038fcb6aa4f8a8"
+            ]
+        ]
+    },
+    {
+        "id": "1ffe8f911a24c884",
+        "type": "ui_table",
+        "z": "c0d83d5b56c5e4a4",
+        "group": "a985cb87b1c1ec1e",
+        "name": "Emergency",
+        "order": 2,
+        "width": 12,
+        "height": 10,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1030,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "6e038fcb6aa4f8a8",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "table_data",
+        "func": "msg.payload.forEach(function (item) {\n    // Delete unwanted fields\n    delete item._id;\n    delete item._msgid;\n    delete item.Sender;\n    delete item.Timestamp;\n});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 600,
+        "wires": [
+            [
+                "1ffe8f911a24c884"
+            ]
+        ]
+    },
+    {
+        "id": "eabc40158e4c7494",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "tab_changer",
+        "func": "if (msg.payload = \"View all emergencies\") {\nmsg.payload = {\"tab\":\"Emergency\"}\nreturn msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 540,
+        "wires": [
+            [
+                "d0188dbdc54d0c97"
+            ]
+        ]
+    },
+    {
+        "id": "d0188dbdc54d0c97",
+        "type": "ui_ui_control",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "events": "all",
+        "x": 820,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7bacc2365fb4167a",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "adapt",
+        "func": "msg = msg.payload;\nvar timestamp = msg.Timestamp;\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n\n// Make a field \n\nmsg.Date = String(day)+\"/\"+String(month)+\"/\"+String(year);     \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 80,
+        "wires": [
+            [
+                "b0c339375dd1aabe"
+            ]
+        ]
+    },
+    {
+        "id": "b0c339375dd1aabe",
+        "type": "mongodb out",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 530,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "f7dd7632c4e1b10d",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "commands_query",
+        "func": "var applyFilter = flow.get(\"commands.apply\");\nvar roverFilter = flow.get(\"commands.rover\");\nvar priorityFilter = flow.get(\"commands.priority\");\nvar timestamp = flow.get(\"commands.date\");\nvar enableDate = flow.get(\"commands.enableDate\");\n\n// Create a new Date object\nvar date = new Date(timestamp);\n// Use date methods to get components like year, month, day, hours, etc.\nvar year = date.getFullYear();\nvar month = date.getMonth() + 1; // Months are zero-indexed, so we add 1\nvar day = date.getDate();\n//var hours = date.getHours();\n//var minutes = date.getMinutes();\n//var seconds = date.getSeconds();\n// Make a field \nmsg.Date = String(day) + \"/\" + String(month) + \"/\" + String(year);\nmsg.payload ={};\n\nif (applyFilter)\n{\n    if (enableDate) {\n\n        msg.payload = { \"Date\": msg.Date };\n        return msg;\n\n    }\n    if (roverFilter == \"Actuator\") {\n\n        //msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, { \"Date\": msg.Date }] };\n        msg.payload = { $and: [{ \"RoverId\": \"Actuator\" }, msg.payload] };\n        return msg;\n\n    } else if (roverFilter == \"Sensor\") {\n\n        msg.payload = { $and: [{ \"RoverId\": \"Sensor\" }, msg.payload] };\n        return msg;\n    }\n    if (priorityFilter != 0){\n        msg.payload = { $and: [msg.payload, { \"Priority\": priorityFilter }]};\n        return msg;\n    }\n}\n\nif (msg.payload || !applyFilter) {\n\n    msg.payload = {};\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "8579d3d5b868c549",
+                "ca71b89c5867af24"
+            ]
+        ]
+    },
+    {
+        "id": "8579d3d5b868c549",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Commands",
+        "operation": "find",
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "f745bc0c33faf113"
+            ]
+        ]
+    },
+    {
+        "id": "5422dccfa5d96b39",
+        "type": "ui_table",
+        "z": "c0d83d5b56c5e4a4",
+        "group": "4b9319c68a3037b6",
+        "name": "Commands",
+        "order": 2,
+        "width": 12,
+        "height": 12,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1030,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f745bc0c33faf113",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "table_data",
+        "func": "msg.payload.forEach(function (item) {\n    // Delete unwanted fields\n    delete item._id;\n    delete item._msgid;\n});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 140,
+        "wires": [
+            [
+                "5422dccfa5d96b39"
+            ]
+        ]
+    },
+    {
+        "id": "ca71b89c5867af24",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "fd7944966711366c",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Apply Filters",
+        "tooltip": "",
+        "group": "a985cb87b1c1ec1e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 660,
+        "wires": [
+            [
+                "27970df4d41862c5",
+                "7d97116e4b746728"
+            ]
+        ]
+    },
+    {
+        "id": "27970df4d41862c5",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "show_filters",
+        "func": "if(msg.payload){\n    msg.payload = {\"group\":{\"show\":[\"Emergency_Filters\"]}};\n}else{\n    msg.payload = {\"group\":{\"hide\":[\"Emergency_Filters\"]}};\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "99cb274ddc0e2491"
+            ]
+        ]
+    },
+    {
+        "id": "99cb274ddc0e2491",
+        "type": "ui_ui_control",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "events": "all",
+        "x": 560,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "95105b920be35cf2",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Apply Filters",
+        "tooltip": "",
+        "group": "4b9319c68a3037b6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "ac2b52185e0df386",
+                "001ede772902c02c"
+            ]
+        ]
+    },
+    {
+        "id": "e7b10d9a88eb44e7",
+        "type": "ui_date_picker",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Date",
+        "group": "cf20bfd785d9312b",
+        "order": 1,
+        "width": "4",
+        "height": 1,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "b43ce1873adc99a8"
+            ]
+        ]
+    },
+    {
+        "id": "252516e831b8a64c",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Apply Filters",
+        "tooltip": "",
+        "group": "4c2baad09a9733db",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 1380,
+        "wires": [
+            [
+                "d59b1ae17d5cfe73",
+                "db1720893097a6fe"
+            ]
+        ]
+    },
+    {
+        "id": "d59b1ae17d5cfe73",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "show_filters",
+        "func": "if(msg.payload){\n    msg.payload = {\"group\":{\"show\":[\"Sensors_Filters\"]}};\n}else{\n    msg.payload = {\"group\":{\"hide\":[\"Sensors_Filters\"]}};\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1420,
+        "wires": [
+            [
+                "0163213869e57a9f"
+            ]
+        ]
+    },
+    {
+        "id": "0163213869e57a9f",
+        "type": "ui_ui_control",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "events": "all",
+        "x": 480,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bd71d2043eabaf83",
+        "type": "ui_date_picker",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Date",
+        "group": "2218f630d9569de0",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 1340,
+        "wires": [
+            [
+                "072b5353c7c7ed22"
+            ]
+        ]
+    },
+    {
+        "id": "001ede772902c02c",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "show_filters",
+        "func": "if(msg.payload){\n    msg.payload = {\"group\":{\"show\":[\"Commands_Filters\"]}};\n}else{\n    msg.payload = { \"group\": { \"hide\": [\"Commands_Filters\"]}};\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "6f9dda3671e55308"
+            ]
+        ]
+    },
+    {
+        "id": "6f9dda3671e55308",
+        "type": "ui_ui_control",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "events": "all",
+        "x": 560,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "072b5353c7c7ed22",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sensorsDate",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b43ce1873adc99a8",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "commands.date",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d97116e4b746728",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "applyEmergency",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "00e2a555d829fe0d",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "48185f0eb0aa2e59"
+            ]
+        ]
+    },
+    {
+        "id": "b86d685c60b4cced",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "f7dd7632c4e1b10d"
+            ]
+        ]
+    },
+    {
+        "id": "ac2b52185e0df386",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "commands.apply",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13ebafe1105bc606",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 1280,
+        "wires": [
+            [
+                "98d4f3eca15b01f5"
+            ]
+        ]
+    },
+    {
+        "id": "db1720893097a6fe",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "applySensors",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b82bc151735f7a42",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "commands.rover",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9c4ab3149611797",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "cf20bfd785d9312b",
+        "order": 2,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "1472070b60dd605b"
+            ]
+        ]
+    },
+    {
+        "id": "1472070b60dd605b",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "commands.enableDate",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3a785b2bf8b1484",
+        "type": "ui_chart",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "group": "4c2baad09a9733db",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f879dc62f302616b",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "chart_data",
+        "func": "var arrayTemp=[];\nvar arrayHum=[];\nvar arrayPres=[];\nvar arrayRad=[];\nif (Array.isArray(msg.payload)&& msg.payload.length>0)\n{\n    for (var i = 0; i < msg.payload.length; i++) {\n        arrayTemp.push({ x: msg.payload[i].Timestamp, y: msg.payload[i].Temperature});\n        arrayHum.push({ x: msg.payload[i].Timestamp, y: msg.payload[i].Humidity });\n        arrayPres.push({ x: msg.payload[i].Timestamp, y: msg.payload[i].Pressure });\n        arrayRad.push({ x: msg.payload[i].Timestamp, y: msg.payload[i].Radiation });\n    } \n    msg.payload = [{\n        \"series\":[\"Temperature\",\"Humidity\",\"Pressure\",\"Radiation\"],\n        \"data\":[arrayTemp,arrayHum,arrayPres,arrayRad],\n        \"labels\":[\"temp\",\"hum\",\"pres\",\"rad\"]\n    }];\n}\nelse msg.payload = [];\nreturn msg;\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 1300,
+        "wires": [
+            [
+                "c3a785b2bf8b1484"
+            ]
+        ]
+    },
+    {
+        "id": "62689096a423368e",
+        "type": "mongodb in",
+        "z": "c0d83d5b56c5e4a4",
+        "mongodb": "3752afa1.deaf9",
+        "name": "",
+        "collection": "Sensors",
+        "operation": "find",
+        "x": 780,
+        "y": 1060,
+        "wires": [
+            [
+                "a179ac947f3439c0"
+            ]
+        ]
+    },
+    {
+        "id": "f1a461d4bb4e7721",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "sensor_query",
+        "func": "\n\n    msg.payload = { '$and': [{ \"RoverId\": \"Sensor\" }, { \"Status\": \"Task finished\" }] }\n    msg.limit = 1;\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1060,
+        "wires": [
+            [
+                "62689096a423368e"
+            ]
+        ]
+    },
+    {
+        "id": "896df80568a631c9",
+        "type": "trigger",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 340,
+        "y": 1060,
+        "wires": [
+            [
+                "f1a461d4bb4e7721"
+            ]
+        ]
+    },
+    {
+        "id": "88fa398a994bf0a9",
+        "type": "ui_dropdown",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Rover",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "cf20bfd785d9312b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "All",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Sensor",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Actuator",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "b82bc151735f7a42"
+            ]
+        ]
+    },
+    {
+        "id": "65074467cfc0f4e6",
+        "type": "ui_numeric",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Priority",
+        "tooltip": "",
+        "group": "cf20bfd785d9312b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "1e808a509892e2fb"
+            ]
+        ]
+    },
+    {
+        "id": "1e808a509892e2fb",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "commands.priority",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a04f528628aba66d",
+        "type": "ui_date_picker",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Date",
+        "group": "cf20bfd785d9312b",
+        "order": 1,
+        "width": "4",
+        "height": 1,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 780,
+        "wires": [
+            [
+                "0181437145e88457"
+            ]
+        ]
+    },
+    {
+        "id": "0181437145e88457",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "emergency.date",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8daf5d832adefb7b",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "emergency.rover",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a508b4e9026dbec9",
+        "type": "ui_switch",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "cf20bfd785d9312b",
+        "order": 2,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 130,
+        "y": 740,
+        "wires": [
+            [
+                "76da7099d99f350e"
+            ]
+        ]
+    },
+    {
+        "id": "76da7099d99f350e",
+        "type": "change",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "emergency.enableDate",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe120ca9462e955c",
+        "type": "ui_dropdown",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "label": "Rover",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "9eaf520d8a23e190",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "All",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Sensor",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Actuator",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 820,
+        "wires": [
+            [
+                "8daf5d832adefb7b"
+            ]
+        ]
+    },
+    {
+        "id": "49215d1496e0e640",
+        "type": "debug",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "dfddd9871dbb5a60",
+        "type": "ui_spacer",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "spacer",
+        "group": "cf20bfd785d9312b",
+        "order": 3,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "b49ad4b4012824ed",
+        "type": "ui_spacer",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "spacer",
+        "group": "9eaf520d8a23e190",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8fc82196e3fa113b",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d79fae3f4ed001ad",
+        "type": "ui_group",
+        "name": "WorldMap",
+        "tab": "f66e778ec46762ed",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3752afa1.deaf9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II15",
+        "name": ""
+    },
+    {
+        "id": "a985cb87b1c1ec1e",
+        "type": "ui_group",
+        "name": "List",
+        "tab": "7f4b7d2cfe038661",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4b9319c68a3037b6",
+        "type": "ui_group",
+        "name": "Lists",
+        "tab": "9ba315c07db0297f",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cf20bfd785d9312b",
+        "type": "ui_group",
+        "name": "Filters",
+        "tab": "9ba315c07db0297f",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4c2baad09a9733db",
+        "type": "ui_group",
+        "name": "List",
+        "tab": "94e4bbe69bea6361",
+        "order": 1,
+        "disp": true,
+        "width": "17",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2218f630d9569de0",
+        "type": "ui_group",
+        "name": "Filters",
+        "tab": "94e4bbe69bea6361",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": "Filters"
+    },
+    {
+        "id": "9eaf520d8a23e190",
+        "type": "ui_group",
+        "name": "Filters",
+        "tab": "7f4b7d2cfe038661",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": "Filters"
+    },
+    {
+        "id": "f66e778ec46762ed",
+        "type": "ui_tab",
+        "name": "Map",
+        "icon": "map",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7f4b7d2cfe038661",
+        "type": "ui_tab",
+        "name": "Emergency",
+        "icon": "warning",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "9ba315c07db0297f",
+        "type": "ui_tab",
+        "name": "Commands",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "94e4bbe69bea6361",
+        "type": "ui_tab",
+        "name": "Sensors",
+        "icon": "track_changes",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
