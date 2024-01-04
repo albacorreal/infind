@@ -1,4 +1,4 @@
-# Electronics
+# Hardware
 This section contains
 - Mechanical parts designed for the rovers
 - Electronic boards and modules for prototyping
