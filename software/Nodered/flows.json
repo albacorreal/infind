@@ -235,7 +235,7 @@
         "tab": "f66e778ec46762ed",
         "order": 1,
         "disp": true,
-        "width": "10",
+        "width": 18,
         "collapse": false,
         "className": ""
     },
@@ -337,7 +337,7 @@
         "tab": "f66e778ec46762ed",
         "order": 2,
         "disp": true,
-        "width": "10",
+        "width": 18,
         "collapse": false,
         "className": ""
     },
@@ -401,7 +401,7 @@
         "model": "gpt-3.5-turbo"
     },
     {
-        "id": "427b441367b6140a",
+        "id": "1bb73950f56574e4",
         "type": "ui_spacer",
         "z": "c0d83d5b56c5e4a4",
         "name": "spacer",
@@ -1096,8 +1096,8 @@
         "z": "c0d83d5b56c5e4a4",
         "group": "d79fae3f4ed001ad",
         "order": 1,
-        "width": "10",
-        "height": "10",
+        "width": "18",
+        "height": "12",
         "name": "Map",
         "lat": "",
         "lon": "",
@@ -1270,7 +1270,7 @@
         "collection": "Rovers",
         "operation": "find",
         "x": 400,
-        "y": 2740,
+        "y": 2800,
         "wires": [
             [
                 "316259445f156164"
@@ -1299,7 +1299,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2740,
+        "y": 2800,
         "wires": [
             [
                 "ced3cd3cea02c595"
@@ -1320,7 +1320,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 620,
-        "y": 2740,
+        "y": 2800,
         "wires": []
     },
     {
@@ -1482,8 +1482,8 @@
         "upsert": false,
         "multi": false,
         "operation": "store",
-        "x": 540,
-        "y": 1660,
+        "x": 520,
+        "y": 1420,
         "wires": []
     },
     {
@@ -1495,7 +1495,7 @@
         "collection": "Sensors",
         "operation": "find",
         "x": 400,
-        "y": 2780,
+        "y": 2840,
         "wires": [
             [
                 "bade907282716f40"
@@ -1524,7 +1524,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2780,
+        "y": 2840,
         "wires": [
             [
                 "1d588e178b9627d5"
@@ -1545,7 +1545,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 620,
-        "y": 2780,
+        "y": 2840,
         "wires": []
     },
     {
@@ -1777,7 +1777,7 @@
         "collection": "Emergency",
         "operation": "find",
         "x": 410,
-        "y": 2700,
+        "y": 2760,
         "wires": [
             [
                 "ba7ec485d75e48f1"
@@ -1806,7 +1806,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2700,
+        "y": 2760,
         "wires": [
             [
                 "a8d8a0f793147271"
@@ -1827,7 +1827,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 640,
-        "y": 2700,
+        "y": 2760,
         "wires": []
     },
     {
@@ -1839,7 +1839,7 @@
         "collection": "Commands",
         "operation": "find",
         "x": 410,
-        "y": 2660,
+        "y": 2720,
         "wires": [
             [
                 "092db928bed98d5a"
@@ -1868,7 +1868,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2660,
+        "y": 2720,
         "wires": [
             [
                 "3ffdfeae1b119e63"
@@ -1889,7 +1889,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 640,
-        "y": 2660,
+        "y": 2720,
         "wires": []
     },
     {
@@ -2578,7 +2578,7 @@
         "tooltip": "",
         "place": "Select option",
         "group": "cf20bfd785d9312b",
-        "order": 6,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -2840,35 +2840,6 @@
         ]
     },
     {
-        "id": "f02c9ed5edfc5def",
-        "type": "inject",
-        "z": "c0d83d5b56c5e4a4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 170,
-        "y": 1140,
-        "wires": [
-            [
-                "2ddb5e5c14074ae0"
-            ]
-        ]
-    },
-    {
         "id": "3eabf45f67b51bc4",
         "type": "inject",
         "z": "c0d83d5b56c5e4a4",
@@ -2890,7 +2861,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2560,
+        "y": 2620,
         "wires": [
             [
                 "94876f407d3d0aef"
@@ -2919,7 +2890,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2600,
+        "y": 2660,
         "wires": [
             [
                 "09da26e82b787978"
@@ -2948,7 +2919,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2520,
+        "y": 2580,
         "wires": [
             [
                 "69f3ddb2acd66ecc"
@@ -2977,7 +2948,7 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 190,
-        "y": 2480,
+        "y": 2540,
         "wires": [
             [
                 "3770edf731392b73"
@@ -2996,7 +2967,7 @@
         "multi": false,
         "operation": "delete",
         "x": 410,
-        "y": 2480,
+        "y": 2540,
         "wires": []
     },
     {
@@ -3011,7 +2982,7 @@
         "multi": false,
         "operation": "delete",
         "x": 410,
-        "y": 2520,
+        "y": 2580,
         "wires": []
     },
     {
@@ -3026,7 +2997,7 @@
         "multi": false,
         "operation": "delete",
         "x": 400,
-        "y": 2560,
+        "y": 2620,
         "wires": []
     },
     {
@@ -3041,7 +3012,7 @@
         "multi": false,
         "operation": "delete",
         "x": 400,
-        "y": 2600,
+        "y": 2660,
         "wires": []
     },
     {
@@ -4471,12 +4442,12 @@
         "group": "1e048c488133238a",
         "name": "",
         "order": 1,
-        "width": "10",
-        "height": "10",
-        "url": "https://iotminirovers.000webhostapp.com/",
+        "width": "18",
+        "height": "12",
+        "url": "",
         "origin": "*",
-        "scale": 100,
-        "x": 390,
+        "scale": "100",
+        "x": 530,
         "y": 1140,
         "wires": [
             []
@@ -4510,6 +4481,128 @@
         "wires": [
             [
                 "a72fd97c176ed561"
+            ]
+        ]
+    },
+    {
+        "id": "b5eb5d939377be24",
+        "type": "mqtt in",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/URL",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8fc82196e3fa113b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1140,
+        "wires": [
+            [
+                "866b805167d2692a"
+            ]
+        ]
+    },
+    {
+        "id": "866b805167d2692a",
+        "type": "json",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 1140,
+        "wires": [
+            [
+                "82d77728d7b89619"
+            ]
+        ]
+    },
+    {
+        "id": "82d77728d7b89619",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "adapt",
+        "func": "msg.url = msg.payload.url\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1140,
+        "wires": [
+            [
+                "2ddb5e5c14074ae0"
+            ]
+        ]
+    },
+    {
+        "id": "5b47372745d44fa9",
+        "type": "mqtt out",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "topic": "II15/URL",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8fc82196e3fa113b",
+        "x": 620,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "13d52625c767d950",
+        "type": "function",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "url_msg",
+        "func": "msg.payload = {\n    \"url\":\"www.google.com\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 2480,
+        "wires": [
+            [
+                "5b47372745d44fa9"
+            ]
+        ]
+    },
+    {
+        "id": "ffb4595a392c5759",
+        "type": "inject",
+        "z": "c0d83d5b56c5e4a4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 2480,
+        "wires": [
+            [
+                "13d52625c767d950"
             ]
         ]
     }
